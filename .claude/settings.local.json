@@ -6,7 +6,13 @@
       "Bash(git remote set-url:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(cat:*)",
+      "Bash(git checkout:*)",
+      "Bash(npx serve:*)",
+      "Bash(curl:*)",
+      "Bash(echo:*)",
+      "Bash(CI=true npm run build:*)"
     ],
     "deny": [],
     "ask": []
