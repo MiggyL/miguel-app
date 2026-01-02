@@ -22,13 +22,27 @@ export default function Avatar({ isSpeaking, videoToPlay, onVideoEnd, isAltAvata
 
   useEffect(() => {
     if (idleVideoRef.current) {
-      // Check if video is already loaded
+      // Set initial source and check if video is already loaded
+      idleVideoRef.current.src = getVideoPath('Idle');
       if (idleVideoRef.current.readyState >= 3) {
         setIsIdleLoading(false);
       }
       idleVideoRef.current.play();
     }
   }, []);
+
+  // Effect to handle avatar switching for idle video
+  useEffect(() => {
+    if (isIdle && idleVideoRef.current) {
+      // Update the video source when avatar changes
+      const newSrc = getVideoPath('Idle');
+      if (idleVideoRef.current.src !== window.location.origin + newSrc) {
+        idleVideoRef.current.src = newSrc;
+        idleVideoRef.current.load();
+        idleVideoRef.current.play().catch(err => console.log('Idle play error:', err));
+      }
+    }
+  }, [isAltAvatar, isIdle]);
 
   const handleIntroEnd = () => {
     setShowIntro(false);
@@ -47,7 +61,11 @@ export default function Avatar({ isSpeaking, videoToPlay, onVideoEnd, isAltAvata
       idleVideoRef.current.pause();
     }
     if (introVideoRef.current) {
+      // Update intro video source based on current avatar
+      const newSrc = getVideoPath('Intro_Static');
+      introVideoRef.current.src = newSrc;
       introVideoRef.current.currentTime = 0;
+      introVideoRef.current.load();
       introVideoRef.current.play();
     }
   };
@@ -125,9 +143,7 @@ export default function Avatar({ isSpeaking, videoToPlay, onVideoEnd, isAltAvata
         disablePictureInPicture
         controlsList="nodownload nofullscreen noremoteplayback"
         style={{ pointerEvents: 'none', display: showIntro ? 'block' : 'none' }}
-      >
-        <source src={getVideoPath('Intro_Static')} type="video/mp4" />
-      </video>
+      />
 
       {/* Idle Loop Video */}
       <video
@@ -141,9 +157,7 @@ export default function Avatar({ isSpeaking, videoToPlay, onVideoEnd, isAltAvata
         disablePictureInPicture
         controlsList="nodownload nofullscreen noremoteplayback"
         style={{ pointerEvents: 'none', display: !showIntro ? 'block' : 'none' }}
-      >
-        <source src={getVideoPath('Idle')} type="video/mp4" />
-      </video>
+      />
 
       {/* Content Video Overlay */}
       {videoToPlay && (
