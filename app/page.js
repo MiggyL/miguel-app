@@ -7,13 +7,19 @@ import DeploymentSelector from './components/DeploymentSelector';
 
 export default function Home() {
   const [currentVideo, setCurrentVideo] = useState(null);
+  const [isAltAvatar, setIsAltAvatar] = useState(false);
 
   const playVideo = (videoName) => {
-    setCurrentVideo(`/me/${videoName}.mp4`);
+    const suffix = isAltAvatar ? 'ALT' : '';
+    setCurrentVideo(`/me/${videoName}${suffix}.mp4`);
   };
 
   const handleVideoEnd = () => {
     setCurrentVideo(null);
+  };
+
+  const handleAvatarSwitch = () => {
+    setIsAltAvatar(!isAltAvatar);
   };
 
   return (
@@ -22,10 +28,16 @@ export default function Home() {
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
         <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-sm">
+            <a
+              href="https://miguel-app.pages.dev/"
+              className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-sm hover:opacity-80 transition-opacity cursor-pointer">
               M
-            </div>
-            <span className="text-lg font-medium text-gray-800">Miguel Lacanienta</span>
+            </a>
+            <a
+              href="https://miguel-app.pages.dev/"
+              className="text-lg font-medium text-gray-800 hover:text-blue-600 transition-colors cursor-pointer">
+              Miguel Lacanienta
+            </a>
           </div>
           <DeploymentSelector />
         </div>
@@ -43,6 +55,8 @@ export default function Home() {
                   isSpeaking={false}
                   videoToPlay={currentVideo}
                   onVideoEnd={handleVideoEnd}
+                  isAltAvatar={isAltAvatar}
+                  onAvatarSwitch={handleAvatarSwitch}
                 />
               </div>
             </div>
@@ -93,7 +107,19 @@ export default function Home() {
                 <h3 className="text-lg font-semibold text-gray-900">Want to chat with me?</h3>
               </div>
               <p className="text-sm text-gray-600 max-w-2xl mx-auto">
-                This is a static portfolio site. For an interactive AI-powered chat experience, visit one of our mirror sites:
+                This is a static portfolio site. For an interactive AI chat experience, visit{' '}
+                <a
+                  href="https://chatgpt.com/g/g-694e44e347008191abda5449e3a9eaa5-miguel-gpt"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-green-50 to-teal-50 border border-green-200 text-green-700 font-semibold hover:from-green-100 hover:to-teal-100 hover:border-green-300 hover:shadow-md transition-all duration-200"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/>
+                  </svg>
+                  Miguel GPT
+                </a>
+                (ChatGPT Custom GPT) or choose one of the API-based chatbots below.
               </p>
               <p className="text-xs text-gray-500 max-w-2xl mx-auto italic">
                 Note: Some sites may be temporarily unavailable due to free tier limitations or usage caps.
@@ -102,8 +128,6 @@ export default function Home() {
                 {/* Vercel Card */}
                 <a
                   href="https://miguel-ai.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="group bg-white rounded-xl p-4 border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-black"></div>
@@ -127,9 +151,7 @@ export default function Home() {
 
                 {/* Netlify Card */}
                 <a
-                  href="https://miguel-ai.netlify.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="https://miguel-ai-2.netlify.app/"
                   className="group bg-white rounded-xl p-4 border border-teal-200 hover:border-teal-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-teal-500"></div>
@@ -154,8 +176,6 @@ export default function Home() {
                 {/* Render Card */}
                 <a
                   href="https://miguel-ai.onrender.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="group bg-white rounded-xl p-4 border border-purple-200 hover:border-purple-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-purple-500"></div>
@@ -180,8 +200,6 @@ export default function Home() {
                 {/* Cloudflare Card */}
                 <a
                   href="https://miguel-ai.pages.dev/"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="group bg-white rounded-xl p-4 border border-orange-200 hover:border-orange-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-orange-500"></div>
@@ -202,3 +220,4 @@ export default function Home() {
     </div>
   );
 }
+

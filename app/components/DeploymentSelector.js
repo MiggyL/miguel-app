@@ -29,7 +29,7 @@ const deployments = [
   },
   {
     name: 'GitHub',
-    url: 'https://elacanienta.github.io/me-2/',
+    url: 'https://elacanienta.github.io/miguel-ai-2/',
     color: 'bg-gray-700',
     textColor: 'text-gray-700'
   }
@@ -50,14 +50,10 @@ export default function DeploymentSelector() {
       setSelectedDeployment(deployments[1]);
     } else if (hostname.includes('onrender.com')) {
       setSelectedDeployment(deployments[2]);
-    } else if (hostname.includes('pages.dev')) {
+    } else if (hostname === 'miguel-ai.pages.dev') {
       setSelectedDeployment(deployments[3]);
-    } else if (hostname.includes('github.io')) {
-      setSelectedDeployment(deployments[4]);
-    } else {
-      // Default to GitHub for localhost or other domains
-      setSelectedDeployment(deployments[4]);
     }
+    // If no match (e.g., miguel-app.pages.dev homepage), selectedDeployment remains null
   }, []);
 
   useEffect(() => {
@@ -83,16 +79,20 @@ export default function DeploymentSelector() {
     }
   };
 
-  if (!selectedDeployment) return null;
-
   return (
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 text-xs text-gray-500 hover:text-gray-700 transition-colors"
       >
-        <div className={`w-2 h-2 rounded-full ${selectedDeployment.color}`}></div>
-        <span>{selectedDeployment.name}</span>
+        {selectedDeployment ? (
+          <>
+            <div className={`w-2 h-2 rounded-full ${selectedDeployment.color}`}></div>
+            <span>{selectedDeployment.name}</span>
+          </>
+        ) : (
+          <span>Mirror Sites</span>
+        )}
         <svg
           className={`w-3 h-3 transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
@@ -110,12 +110,12 @@ export default function DeploymentSelector() {
               key={deployment.name}
               onClick={() => handleDeploymentSelect(deployment)}
               className={`w-full text-left px-3 py-2 text-xs hover:bg-gray-50 flex items-center gap-2 ${
-                selectedDeployment.name === deployment.name ? 'bg-gray-50' : ''
+                selectedDeployment?.name === deployment.name ? 'bg-gray-50' : ''
               }`}
             >
               <div className={`w-2 h-2 rounded-full ${deployment.color}`}></div>
               <span className={deployment.textColor}>{deployment.name}</span>
-              {selectedDeployment.name === deployment.name && (
+              {selectedDeployment?.name === deployment.name && (
                 <svg className="w-3 h-3 ml-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
@@ -127,4 +127,3 @@ export default function DeploymentSelector() {
     </div>
   );
 }
-
