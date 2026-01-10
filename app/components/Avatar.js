@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { getVideoPath, getPosterPath, getFaceIconPath, VIDEO_NAMES } from '@/lib/assets';
 
 export default function Avatar({ isSpeaking, videoToPlay, onVideoEnd, isAltAvatar, onAvatarSwitch, language, onLanguageToggle }) {
   const videoRef = useRef(null);
@@ -15,24 +16,10 @@ export default function Avatar({ isSpeaking, videoToPlay, onVideoEnd, isAltAvata
   const [isContentLoading, setIsContentLoading] = useState(false);
   const [isContentReady, setIsContentReady] = useState(false);
 
-  // Get video paths based on avatar type and language
-  const getVideoPath = (videoName) => {
-    const avatarSuffix = isAltAvatar ? '_real' : '';
-    // Idle videos don't have language versions
-    const langSuffix = (language === 'german' && videoName !== 'idle') ? '_de' : '';
-    return `/${videoName}${avatarSuffix}${langSuffix}.mp4`;
-  };
-
-  // Get poster image path based on avatar type
-  const getPosterPath = () => {
-    const suffix = isAltAvatar ? '_real' : '';
-    return `/poster${suffix}.jpg`;
-  };
-
   useEffect(() => {
     if (idleVideoRef.current) {
       // Set initial source and check if video is already loaded
-      idleVideoRef.current.src = getVideoPath('idle');
+      idleVideoRef.current.src = getVideoPath(VIDEO_NAMES.idle, { isReal: isAltAvatar, language });
       idleVideoRef.current.load(); // Explicitly load the video
       if (idleVideoRef.current.readyState >= 3) {
         setIsIdleLoading(false);
@@ -45,7 +32,7 @@ export default function Avatar({ isSpeaking, videoToPlay, onVideoEnd, isAltAvata
   useEffect(() => {
     if (isIdle && idleVideoRef.current) {
       // Update the video source when avatar changes
-      const newSrc = getVideoPath('idle');
+      const newSrc = getVideoPath(VIDEO_NAMES.idle, { isReal: isAltAvatar, language });
       if (idleVideoRef.current.src !== window.location.origin + newSrc) {
         idleVideoRef.current.src = newSrc;
         idleVideoRef.current.load();
@@ -67,7 +54,7 @@ export default function Avatar({ isSpeaking, videoToPlay, onVideoEnd, isAltAvata
     setIsIntroLoading(true);
     if (introVideoRef.current) {
       // Update intro video source based on current avatar
-      const newSrc = getVideoPath('intro_static');
+      const newSrc = getVideoPath(VIDEO_NAMES.introStatic, { isReal: isAltAvatar, language });
       introVideoRef.current.src = newSrc;
       introVideoRef.current.currentTime = 0;
       introVideoRef.current.load();
@@ -126,7 +113,7 @@ export default function Avatar({ isSpeaking, videoToPlay, onVideoEnd, isAltAvata
 
       {/* Static Poster Image - Always visible as background */}
       <img
-        src={getPosterPath()}
+        src={getPosterPath(isAltAvatar)}
         alt="Avatar"
         className="absolute inset-0 w-full h-full object-contain"
       />
@@ -186,7 +173,7 @@ export default function Avatar({ isSpeaking, videoToPlay, onVideoEnd, isAltAvata
             title={`Switch to ${isAltAvatar ? 'default' : 'alternate'} avatar`}
           >
             <img
-              src={isAltAvatar ? '/face.jpg' : '/face_real.jpg'}
+              src={getFaceIconPath(!isAltAvatar)}
               alt={`${isAltAvatar ? 'Default' : 'Alternate'} avatar`}
               className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-300"
             />

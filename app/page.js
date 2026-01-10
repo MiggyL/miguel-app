@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Avatar from './components/Avatar';
 import QRCode from './components/QRCode';
 import DeploymentSelector from './components/DeploymentSelector';
+import { getVideoPath } from '@/lib/assets';
 
 export default function Home() {
   const [currentVideo, setCurrentVideo] = useState(null);
@@ -11,9 +12,7 @@ export default function Home() {
   const [language, setLanguage] = useState('english'); // 'english' or 'german'
 
   const playVideo = (videoName) => {
-    const avatarSuffix = isAltAvatar ? '_real' : '';
-    const langSuffix = language === 'german' ? '_de' : '';
-    setCurrentVideo(`/${videoName}${avatarSuffix}${langSuffix}.mp4`);
+    setCurrentVideo(getVideoPath(videoName, { isReal: isAltAvatar, language }));
   };
 
   const handleVideoEnd = () => {
