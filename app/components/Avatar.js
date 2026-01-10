@@ -33,10 +33,11 @@ export default function Avatar({ isSpeaking, videoToPlay, onVideoEnd, isAltAvata
     if (idleVideoRef.current) {
       // Set initial source and check if video is already loaded
       idleVideoRef.current.src = getVideoPath('idle');
+      idleVideoRef.current.load(); // Explicitly load the video
       if (idleVideoRef.current.readyState >= 3) {
         setIsIdleLoading(false);
       }
-      idleVideoRef.current.play();
+      idleVideoRef.current.play().catch(err => console.log('Initial idle play error:', err));
     }
   }, []);
 
@@ -200,7 +201,7 @@ export default function Avatar({ isSpeaking, videoToPlay, onVideoEnd, isAltAvata
         onEnded={handleIntroEnd}
         onCanPlay={handleIntroReady}
         onLoadedData={handleIntroReady}
-        preload="auto"
+        preload="metadata"
         playsInline
         disablePictureInPicture
         controlsList="nodownload nofullscreen noremoteplayback"
@@ -213,10 +214,15 @@ export default function Avatar({ isSpeaking, videoToPlay, onVideoEnd, isAltAvata
         className="absolute inset-0 w-full h-full object-contain"
         loop
         muted
-        preload="auto"
+        preload="metadata"
         playsInline
         onCanPlay={() => setIsIdleLoading(false)}
         onLoadedData={() => setIsIdleLoading(false)}
+        onLoadStart={() => setIsIdleLoading(true)}
+        onError={(e) => {
+          console.error('Idle video error:', e);
+          setIsIdleLoading(false);
+        }}
         disablePictureInPicture
         controlsList="nodownload nofullscreen noremoteplayback"
         style={{ pointerEvents: 'none', display: !showIntro && !isPlayingVideo ? 'block' : 'none' }}
