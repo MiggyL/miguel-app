@@ -20,13 +20,13 @@ export default function Avatar({ isSpeaking, videoToPlay, onVideoEnd, isAltAvata
     const avatarSuffix = isAltAvatar ? '_real' : '';
     // Idle videos don't have language versions
     const langSuffix = (language === 'german' && videoName !== 'idle') ? '_de' : '';
-    return `/me/${videoName}${avatarSuffix}${langSuffix}.mp4`;
+    return `/${videoName}${avatarSuffix}${langSuffix}.mp4`;
   };
 
   // Get poster image path based on avatar type
   const getPosterPath = () => {
     const suffix = isAltAvatar ? '_real' : '';
-    return `/me/poster${suffix}.jpg`;
+    return `/poster${suffix}.jpg`;
   };
 
   useEffect(() => {
@@ -186,7 +186,7 @@ export default function Avatar({ isSpeaking, videoToPlay, onVideoEnd, isAltAvata
             title={`Switch to ${isAltAvatar ? 'default' : 'alternate'} avatar`}
           >
             <img
-              src={isAltAvatar ? '/me/face.jpg' : '/me/face_real.jpg'}
+              src={isAltAvatar ? '/face.jpg' : '/face_real.jpg'}
               alt={`${isAltAvatar ? 'Default' : 'Alternate'} avatar`}
               className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-300"
             />

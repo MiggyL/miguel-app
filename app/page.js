@@ -13,7 +13,7 @@ export default function Home() {
   const playVideo = (videoName) => {
     const avatarSuffix = isAltAvatar ? '_real' : '';
     const langSuffix = language === 'german' ? '_de' : '';
-    setCurrentVideo(`/me/${videoName}${avatarSuffix}${langSuffix}.mp4`);
+    setCurrentVideo(`/${videoName}${avatarSuffix}${langSuffix}.mp4`);
   };
 
   const handleVideoEnd = () => {
