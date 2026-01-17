@@ -10,7 +10,7 @@ export const metadata = {
     siteName: 'Miguel App',
     images: [
       {
-        url: 'https://miguel-app.pages.dev/facebook-image-v4.png',
+        url: 'https://miguel-app.pages.dev/fb.png',
         width: 1200,
         height: 630,
         alt: 'Miguel\'s Digital Twin - Interactive Resume & Chat Interface',
@@ -23,7 +23,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Miguel AI - Interactive Resume',
     description: 'Meet Miguel\'s Digital Twin - an Interactive Resume. Chat with Miguel\'s AI assistant to learn about his skills, experience, and projects.',
-    images: ['https://miguel-app.pages.dev/facebook-image-v4.png'],
+    images: ['https://miguel-app.pages.dev/fb.png'],
   },
 }
 
