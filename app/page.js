@@ -101,6 +101,145 @@ export default function Home() {
               </div>
             </div>
           </div>
+          
+          {/* Powered By Ticker */}
+          <div className="mt-6 bg-gray-800 rounded-lg overflow-hidden">
+            <div className="py-3 px-4">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-white text-sm font-semibold">Powered by:</span>
+              </div>
+              <div className="relative overflow-hidden">
+                <div className="flex animate-scroll whitespace-nowrap">
+                  {/* First set of pills */}
+                  <div className="flex items-center gap-4 mr-8">
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/chatgpt_icon.png" alt="ChatGPT" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">ChatGPT</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/claude_icon.png" alt="Claude" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Claude</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/llama_icon.png" alt="Llama 3.3" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Llama 3.3</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/gemma_icon.png" alt="Gemma 3" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Gemma 3</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/mistral_icon.png" alt="Mistral Large" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Mistral Large</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/elevenlabs_icon.png" alt="ElevenLabs" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">ElevenLabs</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/sora_icon.png" alt="Sora 2" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Sora 2</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/capcut_icon.png" alt="CapCut" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">CapCut</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/pippit_icon.png" alt="Pippit" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Pippit</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/github_icon.png" alt="GitHub" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">GitHub</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/vercel_icon.png" alt="Vercel" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Vercel</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/netlify_icon.png" alt="Netlify" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Netlify</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/render_icon.png" alt="Render" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Render</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/cloudflare_icon.png" alt="Cloudflare" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Cloudflare</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/kiro_icon.png" alt="Kiro" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Kiro</span>
+                    </div>
+                  </div>
+                  {/* Duplicate set for continuous scroll */}
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/chatgpt_icon.png" alt="ChatGPT" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">ChatGPT</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/claude_icon.png" alt="Claude" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Claude</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/llama_icon.png" alt="Llama 3.3" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Llama 3.3</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/gemma_icon.png" alt="Gemma 3" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Gemma 3</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/mistral_icon.png" alt="Mistral Large" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Mistral Large</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/elevenlabs_icon.png" alt="ElevenLabs" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">ElevenLabs</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/sora_icon.png" alt="Sora 2" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Sora 2</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/capcut_icon.png" alt="CapCut" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">CapCut</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/pippit_icon.png" alt="Pippit" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Pippit</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/github_icon.png" alt="GitHub" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">GitHub</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/vercel_icon.png" alt="Vercel" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Vercel</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/netlify_icon.png" alt="Netlify" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Netlify</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/render_icon.png" alt="Render" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Render</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/cloudflare_icon.png" alt="Cloudflare" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Cloudflare</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-700 rounded-full">
+                      <img src="/kiro_icon.png" alt="Kiro" className="w-4 h-4" />
+                      <span className="text-white text-sm font-medium">Kiro</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Powered By Section */}
