@@ -50,150 +50,54 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 py-8">
-        {/* Profile Header */}
-        <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm relative mb-8">
+        {/* Avatar Card */}
+        <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm relative">
           <QRCode />
-          <div className="text-center space-y-4">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900">Miguel Lacanienta</h2>
-              <p className="text-gray-600 mt-2 text-lg">BS Computer Science • AI Specialization • Mapúa University</p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-3">
-              <button
-                onClick={() => playVideo('objective')}
-                className="px-6 py-3 rounded-full bg-blue-50 text-blue-700 font-medium border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-all duration-200 cursor-pointer">
-                Objective
-              </button>
-              <button
-                onClick={() => playVideo('skills')}
-                className="px-6 py-3 rounded-full bg-purple-50 text-purple-700 font-medium border border-purple-200 hover:bg-purple-100 hover:border-purple-300 transition-all duration-200 cursor-pointer">
-                Skills
-              </button>
-              <button
-                onClick={() => playVideo('certs')}
-                className="px-6 py-3 rounded-full bg-green-50 text-green-700 font-medium border border-green-200 hover:bg-green-100 hover:border-green-300 transition-all duration-200 cursor-pointer">
-                Certifications
-              </button>
-              <button
-                onClick={() => playVideo('applied')}
-                className="px-6 py-3 rounded-full bg-orange-50 text-orange-700 font-medium border border-orange-200 hover:bg-orange-100 hover:border-orange-300 transition-all duration-200 cursor-pointer">
-                Applied Skills
-              </button>
-              <button
-                onClick={() => playVideo('projects')}
-                className="px-6 py-3 rounded-full bg-pink-50 text-pink-700 font-medium border border-pink-200 hover:bg-pink-100 hover:border-pink-300 transition-all duration-200 cursor-pointer">
-                Projects
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Avatar Section */}
-        <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm mb-8">
-          <div className="flex justify-center">
-            <div className="w-80 aspect-[2/3] rounded-xl overflow-hidden">
-              <Avatar
-                isSpeaking={false}
-                videoToPlay={currentVideo}
-                onVideoEnd={handleVideoEnd}
-                isAltAvatar={isAltAvatar}
-                onAvatarSwitch={handleAvatarSwitch}
-                language={language}
-                onLanguageToggle={handleLanguageToggle}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* AI Tools & Technologies */}
-        <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm mb-8">
-          <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">Powered By:</h3>
-          <p className="text-gray-600 mb-6 text-center">AI Tools & Technologies Used</p>
-          
-          {/* AI / Models / Assistants */}
-          <div className="mb-8">
-            <h4 className="text-lg font-semibold text-gray-800 mb-4">AI / Models / Assistants</h4>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              <div className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <img src="/chatgpt_cap.png" alt="ChatGPT" className="w-12 h-12 mb-2" />
-                <span className="text-sm font-medium text-gray-700">ChatGPT</span>
-              </div>
-              <div className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <img src="/claude_cap.png" alt="Claude" className="w-12 h-12 mb-2" />
-                <span className="text-sm font-medium text-gray-700">Claude</span>
-              </div>
-              <div className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <img src="/llama_cap.png" alt="Llama 3.3" className="w-12 h-12 mb-2" />
-                <span className="text-sm font-medium text-gray-700">Llama 3.3</span>
-              </div>
-              <div className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <img src="/gemma_cap.png" alt="Gemma 3" className="w-12 h-12 mb-2" />
-                <span className="text-sm font-medium text-gray-700">Gemma 3</span>
-              </div>
-              <div className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <img src="/mistral_cap.png" alt="Mistral Large" className="w-12 h-12 mb-2" />
-                <span className="text-sm font-medium text-gray-700">Mistral Large</span>
+          <div className="grid md:grid-cols-3 gap-6 items-center">
+            <div className="md:col-span-1">
+              <div className="aspect-[2/3] rounded-xl overflow-hidden">
+                <Avatar
+                  isSpeaking={false}
+                  videoToPlay={currentVideo}
+                  onVideoEnd={handleVideoEnd}
+                  isAltAvatar={isAltAvatar}
+                  onAvatarSwitch={handleAvatarSwitch}
+                  language={language}
+                  onLanguageToggle={handleLanguageToggle}
+                />
               </div>
             </div>
-          </div>
-
-          {/* Voice / Avatar / Video */}
-          <div className="mb-8">
-            <h4 className="text-lg font-semibold text-gray-800 mb-4">Voice / Avatar / Video</h4>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <img src="/elevenlabs_cap.png" alt="ElevenLabs" className="w-12 h-12 mb-2" />
-                <span className="text-sm font-medium text-gray-700">ElevenLabs</span>
+            <div className="md:col-span-2 space-y-4">
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-900">Miguel Lacanienta</h2>
+                <p className="text-gray-600 mt-1">BS Computer Science • AI Specialization • Mapúa University</p>
               </div>
-              <div className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <img src="/sora_cap.png" alt="Sora 2" className="w-12 h-12 mb-2" />
-                <span className="text-sm font-medium text-gray-700">Sora 2</span>
-              </div>
-              <div className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <img src="/capcut_cap.png" alt="CapCut" className="w-12 h-12 mb-2" />
-                <span className="text-sm font-medium text-gray-700">CapCut</span>
-              </div>
-              <div className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <img src="/pippit_cap.png" alt="Pippit" className="w-12 h-12 mb-2" />
-                <span className="text-sm font-medium text-gray-700">Pippit</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Dev / Hosting / Infra */}
-          <div className="mb-8">
-            <h4 className="text-lg font-semibold text-gray-800 mb-4">Dev / Hosting / Infra</h4>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              <div className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <img src="/github_cap.png" alt="GitHub" className="w-12 h-12 mb-2" />
-                <span className="text-sm font-medium text-gray-700">GitHub</span>
-              </div>
-              <div className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <img src="/vercel_cap.png" alt="Vercel" className="w-12 h-12 mb-2" />
-                <span className="text-sm font-medium text-gray-700">Vercel</span>
-              </div>
-              <div className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <img src="/netlify_cap.png" alt="Netlify" className="w-12 h-12 mb-2" />
-                <span className="text-sm font-medium text-gray-700">Netlify</span>
-              </div>
-              <div className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <img src="/render_cap.png" alt="Render" className="w-12 h-12 mb-2" />
-                <span className="text-sm font-medium text-gray-700">Render</span>
-              </div>
-              <div className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <img src="/cloudflare_cap.png" alt="Cloudflare" className="w-12 h-12 mb-2" />
-                <span className="text-sm font-medium text-gray-700">Cloudflare</span>
-              </div>
-            </div>
-          </div>
-
-          {/* IDE */}
-          <div>
-            <h4 className="text-lg font-semibold text-gray-800 mb-4">IDE</h4>
-            <div className="grid grid-cols-2 md:grid-cols-1 gap-4 max-w-xs">
-              <div className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                <img src="/kiro_cap.png" alt="Kiro" className="w-12 h-12 mb-2" />
-                <span className="text-sm font-medium text-gray-700">Kiro</span>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => playVideo('objective')}
+                  className="px-4 py-2 rounded-full bg-blue-50 text-blue-700 text-sm font-medium border border-blue-200 hover:bg-blue-100 hover:border-blue-300 transition-all duration-200 cursor-pointer">
+                  Objective
+                </button>
+                <button
+                  onClick={() => playVideo('skills')}
+                  className="px-4 py-2 rounded-full bg-purple-50 text-purple-700 text-sm font-medium border border-purple-200 hover:bg-purple-100 hover:border-purple-300 transition-all duration-200 cursor-pointer">
+                  Skills
+                </button>
+                <button
+                  onClick={() => playVideo('certs')}
+                  className="px-4 py-2 rounded-full bg-green-50 text-green-700 text-sm font-medium border border-green-200 hover:bg-green-100 hover:border-green-300 transition-all duration-200 cursor-pointer">
+                  Certifications
+                </button>
+                <button
+                  onClick={() => playVideo('applied')}
+                  className="px-4 py-2 rounded-full bg-orange-50 text-orange-700 text-sm font-medium border border-orange-200 hover:bg-orange-100 hover:border-orange-300 transition-all duration-200 cursor-pointer">
+                  Applied Skills
+                </button>
+                <button
+                  onClick={() => playVideo('projects')}
+                  className="px-4 py-2 rounded-full bg-pink-50 text-pink-700 text-sm font-medium border border-pink-200 hover:bg-pink-100 hover:border-pink-300 transition-all duration-200 cursor-pointer">
+                  Projects
+                </button>
               </div>
             </div>
           </div>
