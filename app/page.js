@@ -389,7 +389,7 @@ function HomeContent() {
 
                 {/* Glow overlay — sits on top of cards, blocks clicks, glow effect only */}
                 {highlightedMirror && (
-                  <div className="absolute inset-0 z-10 pointer-events-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="absolute inset-0 z-10 pointer-events-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
                     <div className={`rounded-xl transition-shadow duration-300 ${
                       highlightedMirror === 'all'
                         ? 'shadow-[0_0_14px_rgba(59,130,246,0.4)]'
