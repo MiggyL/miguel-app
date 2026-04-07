@@ -387,32 +387,30 @@ function HomeContent() {
                   </div>
                 </a>
 
-                {/* Highlight overlay — covers originals, blocks clicks, shows effects on top */}
+                {/* Glow overlay — sits on top of cards, blocks clicks, glow effect only */}
                 {highlightedMirror && (
-                  <>
-                    {/* Solid cover over all cards — hides originals completely */}
-                    <div className={`absolute inset-0 z-10 rounded-xl transition-colors duration-300 ${
-                      highlightedMirror === 'all' ? 'bg-blue-50/80' : 'bg-white/90'
+                  <div className="absolute inset-0 z-10 pointer-events-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className={`rounded-xl transition-shadow duration-300 ${
+                      highlightedMirror === 'all'
+                        ? 'shadow-[0_0_14px_rgba(59,130,246,0.4)]'
+                        : 'shadow-[0_0_10px_rgba(59,130,246,0.2)]'
                     }`} />
-                    {/* Cloudflare clone card — positioned over the 4th card slot */}
-                    {highlightedMirror === 'cloudflare' && (
-                      <div className="absolute z-20 pointer-events-none right-0 bottom-0 w-full lg:w-1/4 md:w-1/2 p-0">
-                        <div className="bg-white rounded-xl p-4 border border-orange-400 scale-105 ring-2 ring-orange-300 cf-pulse transition-all duration-300">
-                          <div className="flex items-center gap-2 mb-3">
-                            <div className="w-3 h-3 rounded-full bg-orange-500"></div>
-                            <h4 className="text-base font-semibold text-orange-700">Cloudflare</h4>
-                            <span className="ml-auto text-[10px] font-semibold text-orange-600 bg-orange-100 px-1.5 py-0.5 rounded-full">Recommended</span>
-                          </div>
-                          <div className="space-y-1.5">
-                            <div className="flex items-start gap-1.5">
-                              <span className="text-gray-400 text-xs mt-0.5">&bull;</span>
-                              <p className="text-xs"><span className="text-gray-700 font-medium">Mistral Large</span> <span className="text-gray-400">/ Mistral AI</span></p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </>
+                    <div className={`rounded-xl transition-shadow duration-300 ${
+                      highlightedMirror === 'all'
+                        ? 'shadow-[0_0_14px_rgba(59,130,246,0.4)]'
+                        : 'shadow-[0_0_10px_rgba(59,130,246,0.2)]'
+                    }`} />
+                    <div className={`rounded-xl transition-shadow duration-300 ${
+                      highlightedMirror === 'all'
+                        ? 'shadow-[0_0_14px_rgba(59,130,246,0.4)]'
+                        : 'shadow-[0_0_10px_rgba(59,130,246,0.2)]'
+                    }`} />
+                    <div className={`rounded-xl transition-shadow duration-300 ${
+                      highlightedMirror === 'all'
+                        ? 'shadow-[0_0_14px_rgba(59,130,246,0.4)]'
+                        : 'cf-pulse'
+                    }`} />
+                  </div>
                 )}
               </div>
             </div>
