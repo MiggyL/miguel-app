@@ -62,8 +62,8 @@ const INTRO_HIGHLIGHTS = {
 
 // Maps Intro cue index → mirror card highlight mode
 const INTRO_MIRROR_HIGHLIGHTS = {
-  EN: { 7: 'all', 8: 'cloudflare', 9: 'cloudflare' },
-  DE: { 8: 'all', 9: 'cloudflare', 10: 'cloudflare' },
+  EN: { 7: 'all', 8: 'cloudflare', 9: 'cloudflare-only' },
+  DE: { 8: 'all', 9: 'cloudflare', 10: 'cloudflare-only' },
 };
 
 // Map section button labels to video filenames in EN/ and DE/

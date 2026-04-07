@@ -391,14 +391,20 @@ function HomeContent() {
                 {highlightedMirror && (
                   <div className="absolute inset-0 z-10 pointer-events-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
                     {/* Vercel — black */}
-                    <div className="rounded-xl shadow-[0_0_14px_rgba(0,0,0,0.35)] transition-shadow duration-300" />
+                    <div className={`rounded-xl transition-shadow duration-300 ${
+                      highlightedMirror !== 'cloudflare-only' ? 'shadow-[0_0_14px_rgba(0,0,0,0.35)]' : ''
+                    }`} />
                     {/* Netlify — teal */}
-                    <div className="rounded-xl shadow-[0_0_14px_rgba(20,184,166,0.5)] transition-shadow duration-300" />
+                    <div className={`rounded-xl transition-shadow duration-300 ${
+                      highlightedMirror !== 'cloudflare-only' ? 'shadow-[0_0_14px_rgba(20,184,166,0.5)]' : ''
+                    }`} />
                     {/* Render — purple */}
-                    <div className="rounded-xl shadow-[0_0_14px_rgba(168,85,247,0.5)] transition-shadow duration-300" />
+                    <div className={`rounded-xl transition-shadow duration-300 ${
+                      highlightedMirror !== 'cloudflare-only' ? 'shadow-[0_0_14px_rgba(168,85,247,0.5)]' : ''
+                    }`} />
                     {/* Cloudflare — orange */}
                     <div className={`rounded-xl transition-shadow duration-300 ${
-                      highlightedMirror === 'cloudflare' ? 'cf-pulse' : 'shadow-[0_0_14px_rgba(249,115,22,0.5)]'
+                      highlightedMirror === 'cloudflare' || highlightedMirror === 'cloudflare-only' ? 'cf-pulse' : 'shadow-[0_0_14px_rgba(249,115,22,0.5)]'
                     }`} />
                   </div>
                 )}
