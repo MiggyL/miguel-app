@@ -299,20 +299,10 @@ function HomeContent() {
                 Note: Some sites may be temporarily unavailable due to free tier limitations or usage caps.
               </p>
               <div ref={mirrorCardsRef} className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-                {/* Non-clickable overlay during intro highlight */}
-                {highlightedMirror && (
-                  <div className="absolute inset-0 z-10 pointer-events-auto" />
-                )}
                 {/* Vercel Card */}
                 <a
                   href="https://miguel-ai.vercel.app/"
-                  className={`group bg-white rounded-xl p-4 border transition-all duration-300 cursor-pointer ${
-                    highlightedMirror === 'all'
-                      ? 'border-blue-300 shadow-[0_0_12px_rgba(59,130,246,0.3)]'
-                      : highlightedMirror === 'cloudflare'
-                      ? 'border-gray-200 opacity-40'
-                      : 'border-gray-200 hover:border-gray-300 hover:shadow-lg'
-                  }`}>
+                  className="group bg-white rounded-xl p-4 border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-black"></div>
                     <h4 className="text-base font-semibold text-gray-900">Vercel</h4>
@@ -336,13 +326,7 @@ function HomeContent() {
                 {/* Netlify Card */}
                 <a
                   href="https://miguel-ai-2.netlify.app/"
-                  className={`group bg-white rounded-xl p-4 border transition-all duration-300 cursor-pointer ${
-                    highlightedMirror === 'all'
-                      ? 'border-blue-300 shadow-[0_0_12px_rgba(59,130,246,0.3)]'
-                      : highlightedMirror === 'cloudflare'
-                      ? 'border-teal-200 opacity-40'
-                      : 'border-teal-200 hover:border-teal-300 hover:shadow-lg'
-                  }`}>
+                  className="group bg-white rounded-xl p-4 border border-teal-200 hover:border-teal-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-teal-500"></div>
                     <h4 className="text-base font-semibold text-teal-700">Netlify</h4>
@@ -366,13 +350,7 @@ function HomeContent() {
                 {/* Render Card */}
                 <a
                   href="https://miguel-ai.onrender.com/"
-                  className={`group bg-white rounded-xl p-4 border transition-all duration-300 cursor-pointer ${
-                    highlightedMirror === 'all'
-                      ? 'border-blue-300 shadow-[0_0_12px_rgba(59,130,246,0.3)]'
-                      : highlightedMirror === 'cloudflare'
-                      ? 'border-purple-200 opacity-40'
-                      : 'border-purple-200 hover:border-purple-300 hover:shadow-lg'
-                  }`}>
+                  className="group bg-white rounded-xl p-4 border border-purple-200 hover:border-purple-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-purple-500"></div>
                     <h4 className="text-base font-semibold text-purple-700">Render</h4>
@@ -396,19 +374,10 @@ function HomeContent() {
                 {/* Cloudflare Card */}
                 <a
                   href="https://miguel-ai.pages.dev/"
-                  className={`group bg-white rounded-xl p-4 border transition-all duration-300 cursor-pointer ${
-                    highlightedMirror === 'all'
-                      ? 'border-blue-300 shadow-[0_0_12px_rgba(59,130,246,0.3)]'
-                      : highlightedMirror === 'cloudflare'
-                      ? 'border-orange-400 scale-105 ring-2 ring-orange-300 cf-pulse z-20 relative'
-                      : 'border-orange-200 hover:border-orange-300 hover:shadow-lg'
-                  }`}>
+                  className="group bg-white rounded-xl p-4 border border-orange-200 hover:border-orange-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-orange-500"></div>
                     <h4 className="text-base font-semibold text-orange-700">Cloudflare</h4>
-                    {highlightedMirror === 'cloudflare' && (
-                      <span className="ml-auto text-[10px] font-semibold text-orange-600 bg-orange-100 px-1.5 py-0.5 rounded-full">Recommended</span>
-                    )}
                   </div>
                   <div className="space-y-1.5">
                     <div className="flex items-start gap-1.5">
@@ -417,6 +386,107 @@ function HomeContent() {
                     </div>
                   </div>
                 </a>
+
+                {/* Clone overlay — non-interactive visual copy of cards with effects, placed on top */}
+                {highlightedMirror && (
+                  <div className="absolute inset-0 z-10 pointer-events-none grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {/* Vercel Clone */}
+                    <div className={`rounded-xl p-4 border transition-all duration-300 ${
+                      highlightedMirror === 'all'
+                        ? 'bg-white border-blue-300 shadow-[0_0_12px_rgba(59,130,246,0.3)]'
+                        : 'bg-white/60 border-gray-200 opacity-40'
+                    }`}>
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-3 h-3 rounded-full bg-black"></div>
+                        <h4 className="text-base font-semibold text-gray-900">Vercel</h4>
+                      </div>
+                      <div className="space-y-1.5">
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-gray-400 text-xs mt-0.5">&bull;</span>
+                          <p className="text-xs"><span className="text-gray-700 font-medium">Llama 3.3 70B</span> <span className="text-gray-400">/ Groq</span></p>
+                        </div>
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-gray-400 text-xs mt-0.5">&bull;</span>
+                          <p className="text-xs"><span className="text-gray-700 font-medium">Gemma 3 27B</span> <span className="text-gray-400">/ Google</span></p>
+                        </div>
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-gray-400 text-xs mt-0.5">&bull;</span>
+                          <p className="text-xs"><span className="text-gray-700 font-medium">Mistral Large</span> <span className="text-gray-400">/ Mistral AI</span></p>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Netlify Clone */}
+                    <div className={`rounded-xl p-4 border transition-all duration-300 ${
+                      highlightedMirror === 'all'
+                        ? 'bg-white border-blue-300 shadow-[0_0_12px_rgba(59,130,246,0.3)]'
+                        : 'bg-white/60 border-teal-200 opacity-40'
+                    }`}>
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-3 h-3 rounded-full bg-teal-500"></div>
+                        <h4 className="text-base font-semibold text-teal-700">Netlify</h4>
+                      </div>
+                      <div className="space-y-1.5">
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-gray-400 text-xs mt-0.5">&bull;</span>
+                          <p className="text-xs"><span className="text-gray-700 font-medium">Llama 3.3 70B</span> <span className="text-gray-400">/ Groq</span></p>
+                        </div>
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-gray-400 text-xs mt-0.5">&bull;</span>
+                          <p className="text-xs"><span className="text-gray-700 font-medium">Gemma 3 27B</span> <span className="text-gray-400">/ Google</span></p>
+                        </div>
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-gray-400 text-xs mt-0.5">&bull;</span>
+                          <p className="text-xs"><span className="text-gray-700 font-medium">Mistral Large</span> <span className="text-gray-400">/ Mistral AI</span></p>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Render Clone */}
+                    <div className={`rounded-xl p-4 border transition-all duration-300 ${
+                      highlightedMirror === 'all'
+                        ? 'bg-white border-blue-300 shadow-[0_0_12px_rgba(59,130,246,0.3)]'
+                        : 'bg-white/60 border-purple-200 opacity-40'
+                    }`}>
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-3 h-3 rounded-full bg-purple-500"></div>
+                        <h4 className="text-base font-semibold text-purple-700">Render</h4>
+                      </div>
+                      <div className="space-y-1.5">
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-gray-400 text-xs mt-0.5">&bull;</span>
+                          <p className="text-xs"><span className="text-gray-700 font-medium">Llama 3.3 70B</span> <span className="text-gray-400">/ Groq</span></p>
+                        </div>
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-gray-400 text-xs mt-0.5">&bull;</span>
+                          <p className="text-xs"><span className="text-gray-700 font-medium">Gemma 3 27B</span> <span className="text-gray-400">/ Google</span></p>
+                        </div>
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-gray-400 text-xs mt-0.5">&bull;</span>
+                          <p className="text-xs"><span className="text-gray-700 font-medium">Mistral Large</span> <span className="text-gray-400">/ Mistral AI</span></p>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Cloudflare Clone */}
+                    <div className={`rounded-xl p-4 border transition-all duration-300 ${
+                      highlightedMirror === 'all'
+                        ? 'bg-white border-blue-300 shadow-[0_0_12px_rgba(59,130,246,0.3)]'
+                        : 'bg-white border-orange-400 scale-105 ring-2 ring-orange-300 cf-pulse'
+                    }`}>
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-3 h-3 rounded-full bg-orange-500"></div>
+                        <h4 className="text-base font-semibold text-orange-700">Cloudflare</h4>
+                        {highlightedMirror === 'cloudflare' && (
+                          <span className="ml-auto text-[10px] font-semibold text-orange-600 bg-orange-100 px-1.5 py-0.5 rounded-full">Recommended</span>
+                        )}
+                      </div>
+                      <div className="space-y-1.5">
+                        <div className="flex items-start gap-1.5">
+                          <span className="text-gray-400 text-xs mt-0.5">&bull;</span>
+                          <p className="text-xs"><span className="text-gray-700 font-medium">Mistral Large</span> <span className="text-gray-400">/ Mistral AI</span></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
