@@ -60,6 +60,12 @@ const INTRO_HIGHLIGHTS = {
   DE: { 3: 'Objective', 4: 'Skills', 5: 'Certifications', 6: 'Applied Skills', 7: 'Projects' },
 };
 
+// Maps Intro cue index → mirror card highlight mode
+const INTRO_MIRROR_HIGHLIGHTS = {
+  EN: { 7: 'all', 8: 'cloudflare', 9: 'cloudflare' },
+  DE: { 8: 'all', 9: 'cloudflare', 10: 'cloudflare' },
+};
+
 // Map section button labels to video filenames in EN/ and DE/
 const SECTION_VIDEO_MAP = {
   'Intro': 'intro.mp4',
@@ -83,7 +89,7 @@ const PROJECT_SEGMENTS = {
 
 export { PROJECT_SEGMENTS };
 
-export default function Banner() {
+export default function Banner({ onMirrorHighlight }) {
   const videoRef = useRef(null);
   const sectionVideoRef = useRef(null);
   const audioRef = useRef(null);
@@ -185,6 +191,7 @@ export default function Banner() {
       setCurrentImages([]);
       setCycleImages([]);
       setHighlightedSection(null);
+      onMirrorHighlight?.(null);
       setOverlayVisible(true);
     };
     sectionVideo.onerror = () => {
@@ -193,6 +200,7 @@ export default function Banner() {
       setCurrentImages([]);
       setCycleImages([]);
       setHighlightedSection(null);
+      onMirrorHighlight?.(null);
       setOverlayVisible(true);
     };
   };
@@ -246,10 +254,12 @@ export default function Banner() {
         onCueChange={(idx, cues) => {
           cuesRef.current = cues || [];
 
-          // Intro: highlight buttons instead of showing images
+          // Intro: highlight buttons and mirror cards instead of showing images
           if (activeSection === 'Intro') {
             const highlights = INTRO_HIGHLIGHTS[language] || {};
             setHighlightedSection(highlights[idx] || null);
+            const mirrorHighlights = INTRO_MIRROR_HIGHLIGHTS[language] || {};
+            onMirrorHighlight?.(mirrorHighlights[idx] || null);
             return;
           }
 

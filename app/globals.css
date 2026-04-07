@@ -39,3 +39,12 @@ body {
 .banner-fade-out {
   animation: bannerFadeOut 0.4s ease-in forwards;
 }
+
+@keyframes cfPulse {
+  0%, 100% { box-shadow: 0 0 15px rgba(249,115,22,0.4), 0 0 30px rgba(249,115,22,0.15); }
+  50% { box-shadow: 0 0 25px rgba(249,115,22,0.7), 0 0 50px rgba(249,115,22,0.25); }
+}
+
+.cf-pulse {
+  animation: cfPulse 1.5s ease-in-out infinite;
+}

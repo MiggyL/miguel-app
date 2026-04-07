@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, Suspense } from 'react';
+import { useState, useRef, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Avatar from './components/Avatar';
 import QRCode from './components/QRCode';
@@ -15,6 +15,14 @@ function HomeContent() {
   const [currentVideo, setCurrentVideo] = useState(null);
   const [isAltAvatar, setIsAltAvatar] = useState(false);
   const [language, setLanguage] = useState('english'); // 'english' or 'german'
+  const [highlightedMirror, setHighlightedMirror] = useState(null);
+  const mirrorCardsRef = useRef(null);
+
+  useEffect(() => {
+    if (highlightedMirror && mirrorCardsRef.current) {
+      mirrorCardsRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [highlightedMirror]);
 
   const playVideo = (videoName) => {
     setCurrentVideo(getVideoPath(videoName, { isReal: isAltAvatar, language }));
@@ -58,7 +66,7 @@ function HomeContent() {
       <div className="max-w-4xl mx-auto px-4 py-4">
         {/* v2: Video Banner from miguel-portfolio */}
         {version === 2 && (
-          <Banner />
+          <Banner onMirrorHighlight={setHighlightedMirror} />
         )}
 
         {/* v1: Original Avatar Card */}
@@ -290,11 +298,21 @@ function HomeContent() {
               <p className="text-xs text-gray-500 max-w-2xl mx-auto italic">
                 Note: Some sites may be temporarily unavailable due to free tier limitations or usage caps.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+              <div ref={mirrorCardsRef} className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+                {/* Non-clickable overlay during intro highlight */}
+                {highlightedMirror && (
+                  <div className="absolute inset-0 z-10 pointer-events-auto" />
+                )}
                 {/* Vercel Card */}
                 <a
                   href="https://miguel-ai.vercel.app/"
-                  className="group bg-white rounded-xl p-4 border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
+                  className={`group bg-white rounded-xl p-4 border transition-all duration-300 cursor-pointer ${
+                    highlightedMirror === 'all'
+                      ? 'border-blue-300 shadow-[0_0_12px_rgba(59,130,246,0.3)]'
+                      : highlightedMirror === 'cloudflare'
+                      ? 'border-gray-200 opacity-40'
+                      : 'border-gray-200 hover:border-gray-300 hover:shadow-lg'
+                  }`}>
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-black"></div>
                     <h4 className="text-base font-semibold text-gray-900">Vercel</h4>
@@ -318,7 +336,13 @@ function HomeContent() {
                 {/* Netlify Card */}
                 <a
                   href="https://miguel-ai-2.netlify.app/"
-                  className="group bg-white rounded-xl p-4 border border-teal-200 hover:border-teal-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
+                  className={`group bg-white rounded-xl p-4 border transition-all duration-300 cursor-pointer ${
+                    highlightedMirror === 'all'
+                      ? 'border-blue-300 shadow-[0_0_12px_rgba(59,130,246,0.3)]'
+                      : highlightedMirror === 'cloudflare'
+                      ? 'border-teal-200 opacity-40'
+                      : 'border-teal-200 hover:border-teal-300 hover:shadow-lg'
+                  }`}>
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-teal-500"></div>
                     <h4 className="text-base font-semibold text-teal-700">Netlify</h4>
@@ -342,7 +366,13 @@ function HomeContent() {
                 {/* Render Card */}
                 <a
                   href="https://miguel-ai.onrender.com/"
-                  className="group bg-white rounded-xl p-4 border border-purple-200 hover:border-purple-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
+                  className={`group bg-white rounded-xl p-4 border transition-all duration-300 cursor-pointer ${
+                    highlightedMirror === 'all'
+                      ? 'border-blue-300 shadow-[0_0_12px_rgba(59,130,246,0.3)]'
+                      : highlightedMirror === 'cloudflare'
+                      ? 'border-purple-200 opacity-40'
+                      : 'border-purple-200 hover:border-purple-300 hover:shadow-lg'
+                  }`}>
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-purple-500"></div>
                     <h4 className="text-base font-semibold text-purple-700">Render</h4>
@@ -366,10 +396,19 @@ function HomeContent() {
                 {/* Cloudflare Card */}
                 <a
                   href="https://miguel-ai.pages.dev/"
-                  className="group bg-white rounded-xl p-4 border border-orange-200 hover:border-orange-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
+                  className={`group bg-white rounded-xl p-4 border transition-all duration-300 cursor-pointer ${
+                    highlightedMirror === 'all'
+                      ? 'border-blue-300 shadow-[0_0_12px_rgba(59,130,246,0.3)]'
+                      : highlightedMirror === 'cloudflare'
+                      ? 'border-orange-400 scale-105 ring-2 ring-orange-300 cf-pulse z-20 relative'
+                      : 'border-orange-200 hover:border-orange-300 hover:shadow-lg'
+                  }`}>
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-orange-500"></div>
                     <h4 className="text-base font-semibold text-orange-700">Cloudflare</h4>
+                    {highlightedMirror === 'cloudflare' && (
+                      <span className="ml-auto text-[10px] font-semibold text-orange-600 bg-orange-100 px-1.5 py-0.5 rounded-full">Recommended</span>
+                    )}
                   </div>
                   <div className="space-y-1.5">
                     <div className="flex items-start gap-1.5">
