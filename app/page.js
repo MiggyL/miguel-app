@@ -397,13 +397,19 @@ function HomeContent() {
                 {/* Clone overlay — fully covers originals, dims non-focused cards (portfolio pattern) */}
                 {highlightedMirror && (() => {
                   const isCFFocus = highlightedMirror === 'cloudflare' || highlightedMirror === 'cloudflare-only';
+                  // Dim non-focused cards. Using opacity since it applies uniformly to all children.
                   const dimOthers = isCFFocus
-                    ? (highlightedMirror === 'cloudflare-only' ? 'opacity-30 grayscale' : 'opacity-50 grayscale')
+                    ? (highlightedMirror === 'cloudflare-only'
+                        ? 'opacity-25 grayscale'
+                        : 'opacity-40 grayscale')
                     : '';
+                  // All-mode gives a subtle ring to confirm the overlay is active
+                  const allBaseRing = highlightedMirror === 'all' ? 'ring-2 ring-blue-200' : '';
+                  const cfCrispRing = isCFFocus ? 'ring-2 ring-orange-400 shadow-[0_0_18px_rgba(249,115,22,0.45)]' : '';
                   return (
                     <div className="absolute inset-0 z-10 pointer-events-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
                       {/* Vercel Clone */}
-                      <div className={`bg-white rounded-xl p-4 border border-gray-200 transition-all duration-500 ${dimOthers}`}>
+                      <div className={`bg-white rounded-xl p-4 border border-gray-200 transition-all duration-500 ${dimOthers} ${allBaseRing}`}>
                         <div className="flex items-center gap-2 mb-3">
                           <div className="w-3 h-3 rounded-full bg-black"></div>
                           <h4 className="text-base font-semibold text-gray-900">Vercel</h4>
@@ -415,7 +421,7 @@ function HomeContent() {
                         </div>
                       </div>
                       {/* Netlify Clone */}
-                      <div className={`bg-white rounded-xl p-4 border border-teal-200 transition-all duration-500 ${dimOthers}`}>
+                      <div className={`bg-white rounded-xl p-4 border border-teal-200 transition-all duration-500 ${dimOthers} ${allBaseRing}`}>
                         <div className="flex items-center gap-2 mb-3">
                           <div className="w-3 h-3 rounded-full bg-teal-500"></div>
                           <h4 className="text-base font-semibold text-teal-700">Netlify</h4>
@@ -427,7 +433,7 @@ function HomeContent() {
                         </div>
                       </div>
                       {/* Render Clone */}
-                      <div className={`bg-white rounded-xl p-4 border border-purple-200 transition-all duration-500 ${dimOthers}`}>
+                      <div className={`bg-white rounded-xl p-4 border border-purple-200 transition-all duration-500 ${dimOthers} ${allBaseRing}`}>
                         <div className="flex items-center gap-2 mb-3">
                           <div className="w-3 h-3 rounded-full bg-purple-500"></div>
                           <h4 className="text-base font-semibold text-purple-700">Render</h4>
@@ -439,7 +445,7 @@ function HomeContent() {
                         </div>
                       </div>
                       {/* Cloudflare Clone — stays crisp, always */}
-                      <div className="bg-white rounded-xl p-4 border border-orange-200 transition-all duration-500">
+                      <div className={`bg-white rounded-xl p-4 border border-orange-200 transition-all duration-500 ${cfCrispRing} ${allBaseRing}`}>
                         <div className="flex items-center gap-2 mb-3">
                           <div className="w-3 h-3 rounded-full bg-orange-500"></div>
                           <h4 className="text-base font-semibold text-orange-700">Cloudflare</h4>
