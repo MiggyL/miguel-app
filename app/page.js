@@ -9,6 +9,21 @@ import DeploymentSelector from './components/DeploymentSelector';
 import VersionToggle from './components/VersionToggle';
 import { getVideoPath, ASSET_CONFIG } from '@/lib/assets';
 
+function DebugBadge({ highlightedMirror }) {
+  const [tick, setTick] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setTick(t => t + 1), 200);
+    return () => clearInterval(id);
+  }, []);
+  const debug = typeof window !== 'undefined' ? window.__DEBUG_MIRROR : null;
+  return (
+    <div className="fixed top-16 right-4 z-50 bg-yellow-100 border border-yellow-400 rounded-lg px-3 py-1 text-xs font-mono whitespace-pre">
+      mirror: {String(highlightedMirror)}{'\n'}
+      {debug ? `lang: ${debug.lang}, idx: ${debug.idx}, val: ${debug.mirrorValue}, keys: [${debug.mapKeys.join(',')}]` : 'no debug info yet'}
+    </div>
+  );
+}
+
 function HomeContent() {
   const searchParams = useSearchParams();
   const version = searchParams.get('v') === '1' ? 1 : 2;
@@ -73,9 +88,7 @@ function HomeContent() {
       <div className="max-w-4xl mx-auto px-4 py-4">
         {/* DEBUG: remove after verification */}
         {version === 2 && (
-          <div className="fixed top-16 right-4 z-50 bg-yellow-100 border border-yellow-400 rounded-lg px-3 py-1 text-xs font-mono">
-            mirror: {String(highlightedMirror)}
-          </div>
+          <DebugBadge highlightedMirror={highlightedMirror} />
         )}
         {/* v2: Video Banner from miguel-portfolio */}
         {version === 2 && (
