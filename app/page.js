@@ -17,9 +17,9 @@ function DebugBadge({ highlightedMirror }) {
   }, []);
   const debug = typeof window !== 'undefined' ? window.__DEBUG_MIRROR : null;
   return (
-    <div className="fixed top-16 right-4 z-50 bg-yellow-100 border border-yellow-400 rounded-lg px-3 py-1 text-xs font-mono whitespace-pre">
+    <div className="fixed top-16 right-4 z-50 bg-yellow-100 border border-yellow-400 rounded-lg px-3 py-1 text-xs font-mono whitespace-pre max-w-xs">
       mirror: {String(highlightedMirror)}{'\n'}
-      {debug ? `lang: ${debug.lang}, idx: ${debug.idx}, val: ${debug.mirrorValue}, keys: [${debug.mapKeys.join(',')}]` : 'no debug info yet'}
+      {debug ? `lang: ${debug.lang}\ncurIdx: ${debug.currentIdx}\nseen: [${[...(debug.seenIdxs||[])].sort((a,b)=>a-b).join(',')}]\ncalls: ${debug.mirrorCalls?.length ? debug.mirrorCalls.map(c=>`${c.idx}=${c.val}`).join(', ') : 'none'}` : 'no debug info yet'}
     </div>
   );
 }
