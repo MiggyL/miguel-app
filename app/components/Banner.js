@@ -215,7 +215,8 @@ export default function Banner({ onMirrorHighlight }) {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover"
+          onClick={overlayVisible ? () => handleSectionClick('Intro') : undefined}
+          className={`w-full h-full object-cover ${overlayVisible ? 'cursor-pointer' : ''}`}
           src={`${V2_BASE}/bg.mp4`}
         />
       </div>
@@ -226,7 +227,8 @@ export default function Banner({ onMirrorHighlight }) {
         loop
         muted
         playsInline
-        className="absolute bottom-0 right-0 object-cover rounded-br-2xl"
+        onClick={overlayVisible ? () => handleSectionClick('Intro') : undefined}
+        className={`absolute bottom-0 right-0 object-cover rounded-br-2xl ${overlayVisible ? 'cursor-pointer' : ''}`}
         style={{ height: '35%', aspectRatio: '1/1', zIndex: 5 }}
         src={`${V2_BASE}/idle.mp4`}
       />
@@ -382,19 +384,12 @@ export default function Banner({ onMirrorHighlight }) {
         className="absolute top-3 right-3 z-10 opacity-50 hover:opacity-80 transition-opacity cursor-pointer"
         aria-label={isMuted ? 'Unmute background music' : 'Mute background music'}
       >
-        {isMuted ? (
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-            <line x1="22" y1="9" x2="16" y2="15" />
-            <line x1="16" y1="9" x2="22" y2="15" />
-          </svg>
-        ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-          </svg>
-        )}
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M9 18V5l12-2v13" />
+          <circle cx="6" cy="18" r="3" />
+          <circle cx="18" cy="16" r="3" />
+          {isMuted && <line x1="3" y1="3" x2="21" y2="21" />}
+        </svg>
       </button>
 
       {/* Segment indicator overlay */}
