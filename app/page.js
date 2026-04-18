@@ -403,66 +403,20 @@ function HomeContent() {
                   </div>
                 </a>
 
-                {/* Clone overlay — fully covers originals, dims non-focused cards (portfolio pattern) */}
-                {highlightedMirror && (() => {
-                  const isCFFocus = highlightedMirror === 'cloudflare' || highlightedMirror === 'cloudflare-only';
-                  // Only dim non-focused cards. No ring, no glow on focused card.
-                  const dimOthers = isCFFocus
-                    ? (highlightedMirror === 'cloudflare-only'
-                        ? 'opacity-25 grayscale blur-[1px]'
-                        : 'opacity-40 grayscale blur-[1px]')
-                    : '';
-                  return (
-                    <div className="absolute inset-0 z-10 pointer-events-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-                      {/* Vercel Clone */}
-                      <div className={`bg-white rounded-xl p-4 border border-gray-200 transition-all duration-500 ${dimOthers}`}>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="w-3 h-3 rounded-full bg-black"></div>
-                          <h4 className="text-base font-semibold text-gray-900">Vercel</h4>
-                        </div>
-                        <div className="space-y-1.5">
-                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Llama 3.3 70B</span> <span className="text-gray-400">/ Groq</span></p></div>
-                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Gemma 3 27B</span> <span className="text-gray-400">/ Google</span></p></div>
-                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Mistral Large</span> <span className="text-gray-400">/ Mistral AI</span></p></div>
-                        </div>
-                      </div>
-                      {/* Netlify Clone */}
-                      <div className={`bg-white rounded-xl p-4 border border-teal-200 transition-all duration-500 ${dimOthers}`}>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="w-3 h-3 rounded-full bg-teal-500"></div>
-                          <h4 className="text-base font-semibold text-teal-700">Netlify</h4>
-                        </div>
-                        <div className="space-y-1.5">
-                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Llama 3.3 70B</span> <span className="text-gray-400">/ Groq</span></p></div>
-                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Gemma 3 27B</span> <span className="text-gray-400">/ Google</span></p></div>
-                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Mistral Large</span> <span className="text-gray-400">/ Mistral AI</span></p></div>
-                        </div>
-                      </div>
-                      {/* Render Clone */}
-                      <div className={`bg-white rounded-xl p-4 border border-purple-200 transition-all duration-500 ${dimOthers}`}>
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="w-3 h-3 rounded-full bg-purple-500"></div>
-                          <h4 className="text-base font-semibold text-purple-700">Render</h4>
-                        </div>
-                        <div className="space-y-1.5">
-                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Llama 3.3 70B</span> <span className="text-gray-400">/ Groq</span></p></div>
-                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Gemma 3 27B</span> <span className="text-gray-400">/ Google</span></p></div>
-                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Mistral Large</span> <span className="text-gray-400">/ Mistral AI</span></p></div>
-                        </div>
-                      </div>
-                      {/* Cloudflare Clone — stays crisp, always */}
-                      <div className="bg-white rounded-xl p-4 border border-orange-200 transition-all duration-500">
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="w-3 h-3 rounded-full bg-orange-500"></div>
-                          <h4 className="text-base font-semibold text-orange-700">Cloudflare</h4>
-                        </div>
-                        <div className="space-y-1.5">
-                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Mistral Large</span> <span className="text-gray-400">/ Mistral AI</span></p></div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })()}
+                {/* Dim overlay — 3 semi-opaque divs blur/grey the non-focused cards.
+                    Uses backdrop-filter so we don't need to clone anything. */}
+                {(highlightedMirror === 'cloudflare' || highlightedMirror === 'cloudflare-only') && (
+                  <div className="absolute inset-0 z-10 pointer-events-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+                    {/* Vercel dim */}
+                    <div className="rounded-xl bg-white/70 transition-all duration-500" style={{ backdropFilter: 'grayscale(1) blur(2px)', WebkitBackdropFilter: 'grayscale(1) blur(2px)' }} />
+                    {/* Netlify dim */}
+                    <div className="rounded-xl bg-white/70 transition-all duration-500" style={{ backdropFilter: 'grayscale(1) blur(2px)', WebkitBackdropFilter: 'grayscale(1) blur(2px)' }} />
+                    {/* Render dim */}
+                    <div className="rounded-xl bg-white/70 transition-all duration-500" style={{ backdropFilter: 'grayscale(1) blur(2px)', WebkitBackdropFilter: 'grayscale(1) blur(2px)' }} />
+                    {/* Cloudflare slot — empty, no overlay */}
+                    <div />
+                  </div>
+                )}
               </div>
             </div>
           </div>
