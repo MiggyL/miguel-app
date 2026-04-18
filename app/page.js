@@ -408,11 +408,11 @@ function HomeContent() {
                 {(highlightedMirror === 'cloudflare' || highlightedMirror === 'cloudflare-only') && (
                   <div className="absolute inset-0 z-10 pointer-events-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
                     {/* Vercel dim */}
-                    <div className="rounded-xl bg-white/70 transition-all duration-500" style={{ backdropFilter: 'grayscale(1) blur(2px)', WebkitBackdropFilter: 'grayscale(1) blur(2px)' }} />
+                    <div className="rounded-xl bg-white/40 transition-all duration-500" style={{ backdropFilter: 'grayscale(0.8)', WebkitBackdropFilter: 'grayscale(0.8)' }} />
                     {/* Netlify dim */}
-                    <div className="rounded-xl bg-white/70 transition-all duration-500" style={{ backdropFilter: 'grayscale(1) blur(2px)', WebkitBackdropFilter: 'grayscale(1) blur(2px)' }} />
+                    <div className="rounded-xl bg-white/40 transition-all duration-500" style={{ backdropFilter: 'grayscale(0.8)', WebkitBackdropFilter: 'grayscale(0.8)' }} />
                     {/* Render dim */}
-                    <div className="rounded-xl bg-white/70 transition-all duration-500" style={{ backdropFilter: 'grayscale(1) blur(2px)', WebkitBackdropFilter: 'grayscale(1) blur(2px)' }} />
+                    <div className="rounded-xl bg-white/40 transition-all duration-500" style={{ backdropFilter: 'grayscale(0.8)', WebkitBackdropFilter: 'grayscale(0.8)' }} />
                     {/* Cloudflare slot — empty, no overlay */}
                     <div />
                   </div>
