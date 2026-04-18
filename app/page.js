@@ -71,6 +71,12 @@ function HomeContent() {
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 py-4">
+        {/* DEBUG: remove after verification */}
+        {version === 2 && (
+          <div className="fixed top-16 right-4 z-50 bg-yellow-100 border border-yellow-400 rounded-lg px-3 py-1 text-xs font-mono">
+            mirror: {String(highlightedMirror)}
+          </div>
+        )}
         {/* v2: Video Banner from miguel-portfolio */}
         {version === 2 && (
           <Banner onMirrorHighlight={setHighlightedMirror} />
