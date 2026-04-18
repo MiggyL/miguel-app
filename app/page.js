@@ -71,6 +71,15 @@ function HomeContent() {
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 py-4">
+        {/* TEMP TEST: click to toggle overlay modes */}
+        {version === 2 && (
+          <div className="mb-2 flex gap-2 text-xs">
+            <button onClick={() => setHighlightedMirror(null)} className="px-2 py-1 bg-gray-200 rounded">off</button>
+            <button onClick={() => setHighlightedMirror('all')} className="px-2 py-1 bg-blue-200 rounded">all</button>
+            <button onClick={() => setHighlightedMirror('cloudflare')} className="px-2 py-1 bg-orange-200 rounded">cloudflare</button>
+            <button onClick={() => setHighlightedMirror('cloudflare-only')} className="px-2 py-1 bg-orange-300 rounded">cf-only</button>
+          </div>
+        )}
         {/* v2: Video Banner from miguel-portfolio */}
         {version === 2 && (
           <Banner onMirrorHighlight={setHighlightedMirror} />
