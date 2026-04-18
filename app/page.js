@@ -9,21 +9,6 @@ import DeploymentSelector from './components/DeploymentSelector';
 import VersionToggle from './components/VersionToggle';
 import { getVideoPath, ASSET_CONFIG } from '@/lib/assets';
 
-function DebugBadge({ highlightedMirror }) {
-  const [tick, setTick] = useState(0);
-  useEffect(() => {
-    const id = setInterval(() => setTick(t => t + 1), 200);
-    return () => clearInterval(id);
-  }, []);
-  const debug = typeof window !== 'undefined' ? window.__DEBUG_MIRROR : null;
-  return (
-    <div className="fixed top-16 right-4 z-50 bg-yellow-100 border border-yellow-400 rounded-lg px-3 py-1 text-xs font-mono whitespace-pre max-w-xs">
-      mirror: {String(highlightedMirror)}{'\n'}
-      {debug ? `lang: ${debug.lang}\ncurIdx: ${debug.currentIdx}\nseen: [${[...(debug.seenIdxs||[])].sort((a,b)=>a-b).join(',')}]\ncalls: ${debug.mirrorCalls?.length ? debug.mirrorCalls.map(c=>`${c.idx}=${c.val}`).join(', ') : 'none'}` : 'no debug info yet'}
-    </div>
-  );
-}
-
 function HomeContent() {
   const searchParams = useSearchParams();
   const version = searchParams.get('v') === '1' ? 1 : 2;
@@ -86,10 +71,6 @@ function HomeContent() {
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 py-4">
-        {/* DEBUG: remove after verification */}
-        {version === 2 && (
-          <DebugBadge highlightedMirror={highlightedMirror} />
-        )}
         {/* v2: Video Banner from miguel-portfolio */}
         {version === 2 && (
           <Banner onMirrorHighlight={setHighlightedMirror} />

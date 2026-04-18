@@ -261,16 +261,7 @@ export default function Banner({ onMirrorHighlight }) {
             const highlights = INTRO_HIGHLIGHTS[language] || {};
             setHighlightedSection(highlights[idx] || null);
             const mirrorHighlights = INTRO_MIRROR_HIGHLIGHTS[language] || {};
-            const mirrorValue = mirrorHighlights[idx] || null;
-            onMirrorHighlight?.(mirrorValue);
-            if (typeof window !== 'undefined') {
-              if (!window.__DEBUG_MIRROR) window.__DEBUG_MIRROR = { seenIdxs: new Set(), mirrorCalls: [] };
-              window.__DEBUG_MIRROR.seenIdxs.add(idx);
-              if (mirrorValue) window.__DEBUG_MIRROR.mirrorCalls.push({ idx, val: mirrorValue });
-              window.__DEBUG_MIRROR.lang = language;
-              window.__DEBUG_MIRROR.currentIdx = idx;
-              window.__DEBUG_MIRROR.mapKeys = Object.keys(mirrorHighlights);
-            }
+            onMirrorHighlight?.(mirrorHighlights[idx] || null);
             return;
           }
 
