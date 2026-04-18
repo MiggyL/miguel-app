@@ -71,15 +71,6 @@ function HomeContent() {
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 py-4">
-        {/* TEMP TEST: click to toggle overlay modes */}
-        {version === 2 && (
-          <div className="mb-2 flex gap-2 text-xs">
-            <button onClick={() => setHighlightedMirror(null)} className="px-2 py-1 bg-gray-200 rounded">off</button>
-            <button onClick={() => setHighlightedMirror('all')} className="px-2 py-1 bg-blue-200 rounded">all</button>
-            <button onClick={() => setHighlightedMirror('cloudflare')} className="px-2 py-1 bg-orange-200 rounded">cloudflare</button>
-            <button onClick={() => setHighlightedMirror('cloudflare-only')} className="px-2 py-1 bg-orange-300 rounded">cf-only</button>
-          </div>
-        )}
         {/* v2: Video Banner from miguel-portfolio */}
         {version === 2 && (
           <Banner onMirrorHighlight={setHighlightedMirror} />
@@ -314,11 +305,19 @@ function HomeContent() {
               <p className="text-xs text-gray-500 max-w-2xl mx-auto italic">
                 Note: Some sites may be temporarily unavailable due to free tier limitations or usage caps.
               </p>
+              {(() => {
+                // Portfolio-style: focused card gets blue ring + scale, non-focused dim with opacity + blur
+                const cfFocused = highlightedMirror === 'cloudflare' || highlightedMirror === 'cloudflare-only';
+                const isDimmed = cfFocused;
+                const focusedClasses = 'border-blue-400 ring-2 ring-blue-400 shadow-xl scale-[1.03] z-10 relative';
+                const dimmedClasses = 'opacity-30 blur-[1px]';
+                const dimPointerBlock = isDimmed ? 'pointer-events-none' : '';
+                return (
               <div ref={mirrorCardsRef} className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
                 {/* Vercel Card */}
                 <a
                   href="https://miguel-ai.vercel.app/"
-                  className="group bg-white rounded-xl p-4 border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
+                  className={`group bg-white rounded-xl p-4 border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all duration-300 cursor-pointer ${isDimmed ? dimmedClasses + ' ' + dimPointerBlock : ''}`}>
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-black"></div>
                     <h4 className="text-base font-semibold text-gray-900">Vercel</h4>
@@ -342,7 +341,7 @@ function HomeContent() {
                 {/* Netlify Card */}
                 <a
                   href="https://miguel-ai-2.netlify.app/"
-                  className="group bg-white rounded-xl p-4 border border-teal-200 hover:border-teal-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
+                  className={`group bg-white rounded-xl p-4 border border-teal-200 hover:border-teal-300 hover:shadow-lg transition-all duration-300 cursor-pointer ${isDimmed ? dimmedClasses + ' ' + dimPointerBlock : ''}`}>
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-teal-500"></div>
                     <h4 className="text-base font-semibold text-teal-700">Netlify</h4>
@@ -366,7 +365,7 @@ function HomeContent() {
                 {/* Render Card */}
                 <a
                   href="https://miguel-ai.onrender.com/"
-                  className="group bg-white rounded-xl p-4 border border-purple-200 hover:border-purple-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
+                  className={`group bg-white rounded-xl p-4 border border-purple-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 cursor-pointer ${isDimmed ? dimmedClasses + ' ' + dimPointerBlock : ''}`}>
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-purple-500"></div>
                     <h4 className="text-base font-semibold text-purple-700">Render</h4>
@@ -390,7 +389,7 @@ function HomeContent() {
                 {/* Cloudflare Card */}
                 <a
                   href="https://miguel-ai.pages.dev/"
-                  className="group bg-white rounded-xl p-4 border border-orange-200 hover:border-orange-300 hover:shadow-lg transition-all duration-200 cursor-pointer">
+                  className={`group bg-white rounded-xl p-4 border hover:shadow-lg transition-all duration-300 cursor-pointer ${cfFocused ? focusedClasses : 'border-orange-200 hover:border-orange-300'}`}>
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-orange-500"></div>
                     <h4 className="text-base font-semibold text-orange-700">Cloudflare</h4>
@@ -403,42 +402,9 @@ function HomeContent() {
                   </div>
                 </a>
 
-                {/* Portfolio-style overlay: non-focused cards dimmed, focused card glow+scale */}
-                {highlightedMirror && (
-                  <div className="absolute inset-0 z-10 pointer-events-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-                    {/* Vercel dim */}
-                    <div className={`rounded-xl transition-all duration-300 ${
-                      highlightedMirror === 'cloudflare-only'
-                        ? 'bg-white/60 shadow-inner'
-                        : highlightedMirror === 'cloudflare'
-                        ? 'bg-white/40'
-                        : ''
-                    }`} />
-                    {/* Netlify dim */}
-                    <div className={`rounded-xl transition-all duration-300 ${
-                      highlightedMirror === 'cloudflare-only'
-                        ? 'bg-white/60 shadow-inner'
-                        : highlightedMirror === 'cloudflare'
-                        ? 'bg-white/40'
-                        : ''
-                    }`} />
-                    {/* Render dim */}
-                    <div className={`rounded-xl transition-all duration-300 ${
-                      highlightedMirror === 'cloudflare-only'
-                        ? 'bg-white/60 shadow-inner'
-                        : highlightedMirror === 'cloudflare'
-                        ? 'bg-white/40'
-                        : ''
-                    }`} />
-                    {/* Cloudflare glow effect — matches portfolio button: scale + white glow */}
-                    <div className={`rounded-xl transition-all duration-300 ${
-                      highlightedMirror === 'cloudflare' || highlightedMirror === 'cloudflare-only'
-                        ? 'shadow-[0_0_14px_rgba(249,115,22,0.5)] scale-105 ring-2 ring-orange-400/60'
-                        : ''
-                    }`} />
-                  </div>
-                )}
               </div>
+                );
+              })()}
             </div>
           </div>
         </div>
