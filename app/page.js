@@ -403,18 +403,39 @@ function HomeContent() {
                   </div>
                 </a>
 
-                {/* Dim overlay — 3 semi-opaque divs blur/grey the non-focused cards.
-                    Uses backdrop-filter so we don't need to clone anything. */}
-                {(highlightedMirror === 'cloudflare' || highlightedMirror === 'cloudflare-only') && (
+                {/* Portfolio-style overlay: non-focused cards dimmed, focused card glow+scale */}
+                {highlightedMirror && (
                   <div className="absolute inset-0 z-10 pointer-events-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
                     {/* Vercel dim */}
-                    <div className="rounded-xl bg-white/40 transition-all duration-500" style={{ backdropFilter: 'grayscale(0.8)', WebkitBackdropFilter: 'grayscale(0.8)' }} />
+                    <div className={`rounded-xl transition-all duration-300 ${
+                      highlightedMirror === 'cloudflare-only'
+                        ? 'bg-white/60 shadow-inner'
+                        : highlightedMirror === 'cloudflare'
+                        ? 'bg-white/40'
+                        : ''
+                    }`} />
                     {/* Netlify dim */}
-                    <div className="rounded-xl bg-white/40 transition-all duration-500" style={{ backdropFilter: 'grayscale(0.8)', WebkitBackdropFilter: 'grayscale(0.8)' }} />
+                    <div className={`rounded-xl transition-all duration-300 ${
+                      highlightedMirror === 'cloudflare-only'
+                        ? 'bg-white/60 shadow-inner'
+                        : highlightedMirror === 'cloudflare'
+                        ? 'bg-white/40'
+                        : ''
+                    }`} />
                     {/* Render dim */}
-                    <div className="rounded-xl bg-white/40 transition-all duration-500" style={{ backdropFilter: 'grayscale(0.8)', WebkitBackdropFilter: 'grayscale(0.8)' }} />
-                    {/* Cloudflare slot — empty, no overlay */}
-                    <div />
+                    <div className={`rounded-xl transition-all duration-300 ${
+                      highlightedMirror === 'cloudflare-only'
+                        ? 'bg-white/60 shadow-inner'
+                        : highlightedMirror === 'cloudflare'
+                        ? 'bg-white/40'
+                        : ''
+                    }`} />
+                    {/* Cloudflare glow effect — matches portfolio button: scale + white glow */}
+                    <div className={`rounded-xl transition-all duration-300 ${
+                      highlightedMirror === 'cloudflare' || highlightedMirror === 'cloudflare-only'
+                        ? 'shadow-[0_0_14px_rgba(249,115,22,0.5)] scale-105 ring-2 ring-orange-400/60'
+                        : ''
+                    }`} />
                   </div>
                 )}
               </div>
