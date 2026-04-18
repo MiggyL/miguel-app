@@ -394,27 +394,63 @@ function HomeContent() {
                   </div>
                 </a>
 
-                {/* Glow overlay — sits on top of cards, blocks clicks, glow effect only */}
-                {highlightedMirror && (
-                  <div className="absolute inset-0 z-10 pointer-events-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-                    {/* Vercel — black */}
-                    <div className={`rounded-xl transition-shadow duration-300 ${
-                      highlightedMirror !== 'cloudflare-only' ? 'shadow-[0_0_14px_rgba(0,0,0,0.35)]' : ''
-                    }`} />
-                    {/* Netlify — teal */}
-                    <div className={`rounded-xl transition-shadow duration-300 ${
-                      highlightedMirror !== 'cloudflare-only' ? 'shadow-[0_0_14px_rgba(20,184,166,0.5)]' : ''
-                    }`} />
-                    {/* Render — purple */}
-                    <div className={`rounded-xl transition-shadow duration-300 ${
-                      highlightedMirror !== 'cloudflare-only' ? 'shadow-[0_0_14px_rgba(168,85,247,0.5)]' : ''
-                    }`} />
-                    {/* Cloudflare — orange */}
-                    <div className={`rounded-xl transition-shadow duration-300 ${
-                      highlightedMirror === 'cloudflare' || highlightedMirror === 'cloudflare-only' ? 'cf-pulse' : 'shadow-[0_0_14px_rgba(249,115,22,0.5)]'
-                    }`} />
-                  </div>
-                )}
+                {/* Clone overlay — fully covers originals, dims non-focused cards (portfolio pattern) */}
+                {highlightedMirror && (() => {
+                  const isCFFocus = highlightedMirror === 'cloudflare' || highlightedMirror === 'cloudflare-only';
+                  const dimOthers = isCFFocus
+                    ? (highlightedMirror === 'cloudflare-only' ? 'opacity-30 grayscale' : 'opacity-50 grayscale')
+                    : '';
+                  return (
+                    <div className="absolute inset-0 z-10 pointer-events-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+                      {/* Vercel Clone */}
+                      <div className={`bg-white rounded-xl p-4 border border-gray-200 transition-all duration-500 ${dimOthers}`}>
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="w-3 h-3 rounded-full bg-black"></div>
+                          <h4 className="text-base font-semibold text-gray-900">Vercel</h4>
+                        </div>
+                        <div className="space-y-1.5">
+                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Llama 3.3 70B</span> <span className="text-gray-400">/ Groq</span></p></div>
+                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Gemma 3 27B</span> <span className="text-gray-400">/ Google</span></p></div>
+                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Mistral Large</span> <span className="text-gray-400">/ Mistral AI</span></p></div>
+                        </div>
+                      </div>
+                      {/* Netlify Clone */}
+                      <div className={`bg-white rounded-xl p-4 border border-teal-200 transition-all duration-500 ${dimOthers}`}>
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="w-3 h-3 rounded-full bg-teal-500"></div>
+                          <h4 className="text-base font-semibold text-teal-700">Netlify</h4>
+                        </div>
+                        <div className="space-y-1.5">
+                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Llama 3.3 70B</span> <span className="text-gray-400">/ Groq</span></p></div>
+                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Gemma 3 27B</span> <span className="text-gray-400">/ Google</span></p></div>
+                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Mistral Large</span> <span className="text-gray-400">/ Mistral AI</span></p></div>
+                        </div>
+                      </div>
+                      {/* Render Clone */}
+                      <div className={`bg-white rounded-xl p-4 border border-purple-200 transition-all duration-500 ${dimOthers}`}>
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="w-3 h-3 rounded-full bg-purple-500"></div>
+                          <h4 className="text-base font-semibold text-purple-700">Render</h4>
+                        </div>
+                        <div className="space-y-1.5">
+                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Llama 3.3 70B</span> <span className="text-gray-400">/ Groq</span></p></div>
+                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Gemma 3 27B</span> <span className="text-gray-400">/ Google</span></p></div>
+                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Mistral Large</span> <span className="text-gray-400">/ Mistral AI</span></p></div>
+                        </div>
+                      </div>
+                      {/* Cloudflare Clone — stays crisp, always */}
+                      <div className="bg-white rounded-xl p-4 border border-orange-200 transition-all duration-500">
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="w-3 h-3 rounded-full bg-orange-500"></div>
+                          <h4 className="text-base font-semibold text-orange-700">Cloudflare</h4>
+                        </div>
+                        <div className="space-y-1.5">
+                          <div className="flex items-start gap-1.5"><span className="text-gray-400 text-xs mt-0.5">&bull;</span><p className="text-xs"><span className="text-gray-700 font-medium">Mistral Large</span> <span className="text-gray-400">/ Mistral AI</span></p></div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
               </div>
             </div>
           </div>
