@@ -208,7 +208,7 @@ export default function Banner({ onMirrorHighlight }) {
   return (
     <div className="relative bg-black rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
       <audio ref={audioRef} loop src={`${V2_BASE}/ambient.mp3`} />
-      <div className="w-full" style={{ aspectRatio: '1173/640' }}>
+      <div className="w-full aspect-[4/5] md:aspect-[1173/640]">
         <video
           ref={videoRef}
           autoPlay
@@ -228,8 +228,8 @@ export default function Banner({ onMirrorHighlight }) {
         muted
         playsInline
         onClick={overlayVisible ? () => handleSectionClick('Intro') : undefined}
-        className={`absolute bottom-0 right-0 object-cover rounded-br-2xl ${overlayVisible ? 'cursor-pointer' : ''}`}
-        style={{ height: '35%', aspectRatio: '1/1', zIndex: 5 }}
+        className={`absolute bottom-0 right-0 object-cover rounded-br-2xl h-[45%] md:h-[35%] ${overlayVisible ? 'cursor-pointer' : ''}`}
+        style={{ aspectRatio: '1/1', zIndex: 5 }}
         src={`${V2_BASE}/idle.mp4`}
       />
 
@@ -237,9 +237,8 @@ export default function Banner({ onMirrorHighlight }) {
       <video
         ref={sectionVideoRef}
         playsInline
-        className="absolute bottom-0 right-0 object-cover rounded-br-2xl transition-opacity duration-300"
+        className="absolute bottom-0 right-0 object-cover rounded-br-2xl transition-opacity duration-300 h-[45%] md:h-[35%]"
         style={{
-          height: '35%',
           aspectRatio: '1/1',
           zIndex: 7,
           opacity: sectionVisible ? 1 : 0,
@@ -355,7 +354,7 @@ export default function Banner({ onMirrorHighlight }) {
             <p className="text-white/80 text-sm sm:text-base font-light mt-1.5 tracking-wide drop-shadow-md">
               BS Computer Science &middot; AI Specialization &middot; Map&uacute;a University &apos;25
             </p>
-            <div className="mt-2 flex items-center gap-1.5">
+            <div className="mt-2 flex flex-wrap md:flex-nowrap items-center justify-center gap-1.5 px-2">
               {['Objective', 'Skills', 'Certifications', 'Applied Skills', 'Projects'].map((section) => {
                 const isFocused = highlightedSection === section;
                 const anyFocused = highlightedSection !== null;

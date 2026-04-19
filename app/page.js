@@ -317,7 +317,7 @@ function HomeContent() {
                 {/* Vercel Card */}
                 <a
                   href="https://miguel-ai.vercel.app/"
-                  className={`group bg-white rounded-xl p-4 border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all duration-300 cursor-pointer ${isDimmed ? dimmedClasses + ' ' + dimPointerBlock : ''}`}>
+                  className={`group bg-white rounded-xl p-3 md:p-4 border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all duration-300 cursor-pointer ${isDimmed ? dimmedClasses + ' ' + dimPointerBlock : ''}`}>
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-black"></div>
                     <h4 className="text-base font-semibold text-gray-900">Vercel</h4>
@@ -341,7 +341,7 @@ function HomeContent() {
                 {/* Netlify Card */}
                 <a
                   href="https://miguel-ai-2.netlify.app/"
-                  className={`group bg-white rounded-xl p-4 border border-teal-200 hover:border-teal-300 hover:shadow-lg transition-all duration-300 cursor-pointer ${isDimmed ? dimmedClasses + ' ' + dimPointerBlock : ''}`}>
+                  className={`group bg-white rounded-xl p-3 md:p-4 border border-teal-200 hover:border-teal-300 hover:shadow-lg transition-all duration-300 cursor-pointer ${isDimmed ? dimmedClasses + ' ' + dimPointerBlock : ''}`}>
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-teal-500"></div>
                     <h4 className="text-base font-semibold text-teal-700">Netlify</h4>
@@ -365,7 +365,7 @@ function HomeContent() {
                 {/* Render Card */}
                 <a
                   href="https://miguel-ai.onrender.com/"
-                  className={`group bg-white rounded-xl p-4 border border-purple-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 cursor-pointer ${isDimmed ? dimmedClasses + ' ' + dimPointerBlock : ''}`}>
+                  className={`group bg-white rounded-xl p-3 md:p-4 border border-purple-200 hover:border-purple-300 hover:shadow-lg transition-all duration-300 cursor-pointer ${isDimmed ? dimmedClasses + ' ' + dimPointerBlock : ''}`}>
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-purple-500"></div>
                     <h4 className="text-base font-semibold text-purple-700">Render</h4>
@@ -389,7 +389,7 @@ function HomeContent() {
                 {/* Cloudflare Card */}
                 <a
                   href="https://miguel-ai.pages.dev/"
-                  className={`group bg-white rounded-xl p-4 border hover:shadow-lg transition-all duration-300 cursor-pointer ${cfFocused ? focusedClasses : 'border-orange-200 hover:border-orange-300'}`}>
+                  className={`group bg-white rounded-xl p-3 md:p-4 border hover:shadow-lg transition-all duration-300 cursor-pointer ${cfFocused ? focusedClasses : 'border-orange-200 hover:border-orange-300'}`}>
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-3 h-3 rounded-full bg-orange-500"></div>
                     <h4 className="text-base font-semibold text-orange-700">Cloudflare</h4>
