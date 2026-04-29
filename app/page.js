@@ -5,9 +5,86 @@ import { useSearchParams } from 'next/navigation';
 import Avatar from './components/Avatar';
 import QRCode from './components/QRCode';
 import Banner from './components/Banner';
-import DeploymentSelector from './components/DeploymentSelector';
 import VersionToggle from './components/VersionToggle';
 import { getVideoPath, ASSET_CONFIG } from '@/lib/assets';
+
+const SOCIALS = [
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/miguel-lacanienta/',
+    svg: (
+      <svg viewBox="0 0 24 24" className="w-full h-full" aria-hidden="true">
+        <rect width="24" height="24" rx="4" fill="#0A66C2" />
+        <path fill="white" d="M7.06 9.5h-3v9h3v-9zM5.56 5.05c-.97 0-1.75.78-1.75 1.75s.78 1.75 1.75 1.75 1.75-.78 1.75-1.75-.78-1.75-1.75-1.75zM20.5 18.5h-3v-4.6c0-1.1-.9-2-2-2s-2 .9-2 2v4.6h-3v-9h3v1.2c.7-1 1.8-1.5 3-1.5 2.2 0 4 1.8 4 4v5.3z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'YouTube',
+    href: 'https://youtube.com/playlist?list=PLwgavg1OXIfGKhX9FHoEG0aIbhMaj5dEH',
+    svg: (
+      <svg viewBox="0 0 24 24" className="w-full h-full" aria-hidden="true">
+        <rect x="0" y="3.5" width="24" height="17" rx="4" fill="#FF0000" />
+        <polygon points="10,8 10,16 16,12" fill="white" />
+      </svg>
+    ),
+  },
+  {
+    name: 'TikTok',
+    href: 'https://www.tiktok.com/@mlacanienta',
+    svg: (
+      <svg viewBox="0 0 24 24" className="w-full h-full" aria-hidden="true">
+        <rect width="24" height="24" rx="4" fill="black" />
+        <path
+          fill="#25F4EE"
+          transform="translate(-1 1)"
+          d="M16.5 7.6a3.6 3.6 0 0 1-2.8-3.2v-.3h-2.6v9.7c0 1.2-1 2.2-2.2 2.2a2.2 2.2 0 0 1-1.7-3.6 2.2 2.2 0 0 1 1.7-.8c.2 0 .5 0 .7.1v-2.6a4.7 4.7 0 0 0-.7 0 4.7 4.7 0 0 0-3.4 8 4.8 4.8 0 0 0 8.1-3.4v-5a6.1 6.1 0 0 0 3.5 1.1V7.5a3.6 3.6 0 0 1-.6 0z"
+        />
+        <path
+          fill="#FE2C55"
+          transform="translate(1 -1)"
+          d="M16.5 7.6a3.6 3.6 0 0 1-2.8-3.2v-.3h-2.6v9.7c0 1.2-1 2.2-2.2 2.2a2.2 2.2 0 0 1-1.7-3.6 2.2 2.2 0 0 1 1.7-.8c.2 0 .5 0 .7.1v-2.6a4.7 4.7 0 0 0-.7 0 4.7 4.7 0 0 0-3.4 8 4.8 4.8 0 0 0 8.1-3.4v-5a6.1 6.1 0 0 0 3.5 1.1V7.5a3.6 3.6 0 0 1-.6 0z"
+        />
+        <path
+          fill="white"
+          d="M16.5 7.6a3.6 3.6 0 0 1-2.8-3.2v-.3h-2.6v9.7c0 1.2-1 2.2-2.2 2.2a2.2 2.2 0 0 1-1.7-3.6 2.2 2.2 0 0 1 1.7-.8c.2 0 .5 0 .7.1v-2.6a4.7 4.7 0 0 0-.7 0 4.7 4.7 0 0 0-3.4 8 4.8 4.8 0 0 0 8.1-3.4v-5a6.1 6.1 0 0 0 3.5 1.1V7.5a3.6 3.6 0 0 1-.6 0z"
+        />
+      </svg>
+    ),
+  },
+  {
+    name: 'Facebook',
+    href: 'https://www.facebook.com/mlacanienta',
+    svg: (
+      <svg viewBox="0 0 24 24" className="w-full h-full" aria-hidden="true">
+        <circle cx="12" cy="12" r="12" fill="#1877F2" />
+        <path
+          fill="white"
+          d="M13.5 8.5h1.7V6h-1.7c-1.66 0-3 1.34-3 3v1.5H8.5v2.5h2v6h2.5v-6h2l.5-2.5h-2.5V9c0-.28.22-.5.5-.5z"
+        />
+      </svg>
+    ),
+  },
+];
+
+function SocialIcons() {
+  return (
+    <div className="flex items-center gap-2">
+      {SOCIALS.map((s) => (
+        <a
+          key={s.name}
+          href={s.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={s.name}
+          className="w-6 h-6 hover:scale-110 transition-transform"
+        >
+          {s.svg}
+        </a>
+      ))}
+    </div>
+  );
+}
 
 function HomeContent() {
   const searchParams = useSearchParams();
@@ -65,7 +142,7 @@ function HomeContent() {
             </span>
             <VersionToggle />
           </div>
-          <DeploymentSelector />
+          <SocialIcons />
         </div>
       </header>
 
