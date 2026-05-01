@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 /**
  * Floating circle control center — bottom-right of viewport.
  * Consolidates the banner's scattered controls (EN/DE language toggle,
- * Play Intro, Mute background music, CV link) into one expandable panel,
+ * Play About, Mute background music, CV link) into one expandable panel,
  * inspired by Next.js dev's indicator.
  */
 export default function FloatingControls({
@@ -89,7 +89,7 @@ export default function FloatingControls({
           open ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'
         }`}
       >
-        {/* Play Intro — YouTube-red play button */}
+        {/* Play About — YouTube-red play button */}
         <button
           onClick={() => {
             setOpen(false);
@@ -101,7 +101,7 @@ export default function FloatingControls({
             <rect x="0" y="3.5" width="24" height="17" rx="4" fill="#FF0000" />
             <polygon points="10,8 10,16 16,12" fill="white" />
           </svg>
-          <span>Play Intro</span>
+          <span>Play About</span>
         </button>
 
         {/* Language toggle — current flag as icon, EN/DE pills next to it */}
