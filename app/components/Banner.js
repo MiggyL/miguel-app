@@ -197,6 +197,7 @@ export default function Banner({ onMirrorHighlight }) {
   }, [isPlaying]);
 
   const handleSectionClick = (section) => {
+    setGameOpen(false);
     const filename = SECTION_VIDEO_MAP[section];
     if (!filename) return;
 
