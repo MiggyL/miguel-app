@@ -1,11 +1,17 @@
 'use client';
 
 import { useState, useRef, useCallback, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { ASSET_CONFIG } from '@/lib/assets';
 import IdleOverlay from './IdleOverlay';
 import Subtitles from './Subtitles';
+import FloatingControls from './FloatingControls';
 
 const V2_BASE = `${ASSET_CONFIG.basePath}/v2`;
+const CV_URL = 'https://drive.google.com/file/d/1RyQRN930zeyjLZe2o_J52zWEB1kWyWQF';
+
+// react-chrome-dino touches window in render — load only on the client
+const ChromeDino = dynamic(() => import('react-chrome-dino'), { ssr: false });
 
 // Maps section → cue index → image filename(s) shown during that cue
 const SECTION_IMAGES = {
@@ -99,6 +105,31 @@ export default function Banner({ onMirrorHighlight }) {
   const [isMuted, setIsMuted] = useState(true);
   const [language, setLanguage] = useState('EN');
   const [overlayVisible, setOverlayVisible] = useState(true);
+  const [gameOpen, setGameOpen] = useState(false);
+
+  // ESC closes the game
+  useEffect(() => {
+    if (!gameOpen) return;
+    const onKey = (e) => { if (e.key === 'Escape') setGameOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [gameOpen]);
+
+  // react-chrome-dino appends its canvas imperatively; Strict Mode
+  // double-mount duplicates it. Watch the host and prune extra canvases.
+  useEffect(() => {
+    if (!gameOpen) return;
+    const host = document.getElementById('dino-game-host');
+    if (!host) return;
+    const prune = () => {
+      const canvases = host.querySelectorAll('canvas.runner-canvas');
+      for (let i = 1; i < canvases.length; i++) canvases[i].remove();
+    };
+    prune();
+    const obs = new MutationObserver(prune);
+    obs.observe(host, { childList: true, subtree: true });
+    return () => obs.disconnect();
+  }, [gameOpen]);
   const [sectionVisible, setSectionVisible] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
   const [currentImages, setCurrentImages] = useState([]);
@@ -423,6 +454,36 @@ export default function Banner({ onMirrorHighlight }) {
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {/* Floating control center — bottom-right, mirrors all banner controls */}
+      <FloatingControls
+        language={language}
+        onLanguageChange={setLanguage}
+        isMuted={isMuted}
+        onToggleMute={toggleAudio}
+        onPlayAbout={() => handleSectionClick('Intro')}
+        onPlayGame={() => setGameOpen(true)}
+        cvHref={CV_URL}
+      />
+
+      {/* Chrome T-Rex offline game — fills the banner when open */}
+      {gameOpen && (
+        <div className="absolute inset-0 z-[70] bg-white overflow-hidden">
+          <div className="w-full h-full flex flex-col justify-center" id="dino-game-host">
+            <ChromeDino />
+          </div>
+          <button
+            onClick={() => setGameOpen(false)}
+            className="absolute top-2 right-2 z-[71] w-8 h-8 rounded-full bg-gray-900/90 text-white hover:bg-gray-800 flex items-center justify-center cursor-pointer shadow-lg"
+            aria-label="Close game"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
         </div>
       )}
     </div>
