@@ -26,6 +26,12 @@ const deployments = [
     url: 'https://miguel-ai.pages.dev/',
     color: 'bg-orange-500',
     textColor: 'text-orange-600'
+  },
+  {
+    name: 'GitHub',
+    url: 'https://elacanienta.github.io/miguel-app/',
+    color: 'bg-gray-700',
+    textColor: 'text-gray-700'
   }
 ];
 
@@ -120,8 +126,5 @@ export default function DeploymentSelector() {
       )}
     </div>
   );
+
 }
-
-
-
-
