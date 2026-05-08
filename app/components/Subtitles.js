@@ -25,7 +25,7 @@ function parseSRT(text) {
   return cues;
 }
 
-export default function Subtitles({ videoRef, language, section, onCueChange }) {
+export default function Subtitles({ videoRef, language, section, onCueChange, srtUrl, silent }) {
   const [cues, setCues] = useState([]);
   const [currentText, setCurrentText] = useState('');
   const animFrameRef = useRef(null);
@@ -40,19 +40,29 @@ export default function Subtitles({ videoRef, language, section, onCueChange }) 
   };
 
   useEffect(() => {
-    if (!section) {
+    // Two callers:
+    //   - Resume Banner uses `section` (resolves to /v2/<lang>/<name>.srt)
+    //   - Cover-letter passes `srtUrl` directly (absolute CDN URL)
+    // Without srtUrl support the cover-letter intro never loads cues, so
+    // onCueChange never fires and the WhatsApp emphasis replica never pops.
+    if (!section && !srtUrl) {
       setCues([]);
       setCurrentText('');
       return;
     }
-    const name = srtMap[section];
-    if (!name) return;
+    const url = srtUrl
+      ? srtUrl
+      : (() => {
+          const name = srtMap[section];
+          return name ? `${V2_BASE}/${language}/${name}.srt` : null;
+        })();
+    if (!url) return;
 
-    fetch(`${V2_BASE}/${language}/${name}.srt`)
+    fetch(url)
       .then((r) => r.text())
       .then((srtText) => setCues(parseSRT(srtText)))
       .catch(() => setCues([]));
-  }, [section, language]);
+  }, [section, language, srtUrl]);
 
   useEffect(() => {
     if (!cues.length || !videoRef?.current) {
@@ -74,7 +84,7 @@ export default function Subtitles({ videoRef, language, section, onCueChange }) 
     };
   }, [cues, videoRef]);
 
-  if (!currentText) return null;
+  if (silent || !currentText) return null;
 
   return (
     <div className="absolute bottom-2 left-0 right-0 z-30 flex justify-center pointer-events-none">
