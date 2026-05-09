@@ -393,7 +393,7 @@ function HomeContent() {
                 <h3 className="text-lg font-semibold text-gray-900">Want to chat with me?</h3>
               </div>
               <p className="text-sm text-gray-600 max-w-2xl mx-auto">
-                This is a static portfolio site. For an interactive AI chat experience, visit{' '}
+                Chat with{' '}
                 <a
                   href="https://chatgpt.com/g/g-694e44e347008191abda5449e3a9eaa5-miguel-gpt"
                   target="_blank"
@@ -405,10 +405,7 @@ function HomeContent() {
                   </svg>
                   Miguel GPT
                 </a>
-                (ChatGPT Custom GPT) or choose one of the API-based chatbots below.
-              </p>
-              <p className="text-xs text-gray-500 max-w-2xl mx-auto italic">
-                Note: Some sites may be temporarily unavailable due to free tier limitations or usage caps.
+                {' '}(on ChatGPT) or one of the chatbots I built below.
               </p>
               {(() => {
                 // Portfolio-style: focused card gets blue ring + scale, non-focused dim with opacity + blur
@@ -418,7 +415,7 @@ function HomeContent() {
                 const dimmedClasses = 'opacity-30 blur-[1px]';
                 const dimPointerBlock = isDimmed ? 'pointer-events-none' : '';
                 return (
-              <div ref={mirrorCardsRef} className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+              <div ref={mirrorCardsRef} className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {/* Vercel Card */}
                 <a
                   href="https://miguel-ai.vercel.app/"
@@ -506,10 +503,12 @@ function HomeContent() {
                     </div>
                   </div>
                 </a>
-
               </div>
                 );
               })()}
+              <p className="text-center text-xs text-gray-500 mt-2">
+                Free-tier hosts — if one's down, try another.
+              </p>
             </div>
           </div>
         </div>
